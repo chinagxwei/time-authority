@@ -13,24 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('routers', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->string('username',128)->comment('用户名');
-            $table->string('email',128)->comment('邮箱')->unique();
-            $table->timestamp('email_verified_at')->comment('邮箱验证时间')->nullable();
-            $table->string('password',128)->comment('密码');
-            $table->rememberToken();
-            $table->smallInteger('user_type')
-                ->unsigned()
-                ->default(5)
-                ->comment('用户类型 5一般用户 100平台管理员 999超级管理员');
-            $table->integer('login_at')->unsigned()->nullable()->comment('最后登录时间');
+            $table->string('router_name', 64)->comment('导航名称');
+            $table->string('router', 128)->nullable()->unique()->comment('路由');
             $table->integer('created_at')->unsigned()->nullable();
             $table->integer('updated_at')->unsigned()->nullable();
             $table->integer('created_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('updated_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('deleted_at')->unsigned()->nullable();
-            $table->comment('用户表');
+            $table->comment('平台路由表');
         });
     }
 
@@ -41,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('routers');
     }
 };
