@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('role_routers', function (Blueprint $table) {
+        Schema::create('system_role_routers', function (Blueprint $table) {
             $table->integer('role_id')->unsigned();
             $table->integer('router_id')->unsigned();
             $table->primary(['role_id', 'router_id']);
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('role_routers');
+        Schema::dropIfExists('system_role_routers');
     }
 };

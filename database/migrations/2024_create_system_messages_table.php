@@ -13,18 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
-            $table->uuid('id')->unique()->primary();
-            $table->integer('role_id')->index()->nullable()->comment('角色ID');
-            $table->string('nickname',128)->nullable()->comment('昵称');
-            $table->string('mobile',24)->nullable()->comment('手机号码');
-            $table->string('remark',128)->nullable()->comment('备注');
+        Schema::create('system_messages', function (Blueprint $table) {
+            $table->uuid('id')->unsigned();
+            $table->string('title', 128)->comment('标题');
+            $table->text('content')->comment('内容');
+            $table->tinyInteger('weight')->unsigned()->default(1)->nullable()->comment('消息重要程度 1一般 2重要 3很重要');
+            $table->smallInteger('user_type')
+                ->unsigned()
+                ->default(5)
+                ->comment('用户类型 1一般用户 10企业理员 100平台管理员 999超级管理员');
             $table->integer('created_at')->unsigned()->nullable();
             $table->integer('updated_at')->unsigned()->nullable();
             $table->integer('created_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('updated_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('deleted_at')->unsigned()->nullable();
-            $table->comment('管理员表');
+            $table->comment('系统消息表');
         });
     }
 
@@ -35,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('system_messages');
     }
 };

@@ -2,7 +2,7 @@
 
 namespace App\Models\Relation;
 
-use App\Models\Member\Order;
+use App\Models\Order\Order;
 
 /**
  * @property string order_sn

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('wallet_unit_balance', function (Blueprint $table) {
             $table->uuid('wallet_id')->index()->nullable()->comment('钱包ID');
             $table->integer('unit_id')->unsigned()->default(0)->comment('单位ID');
+            $table->bigInteger('cumulative_amount')->unsigned()->default(0)->nullable()->comment('累计金额');
             $table->bigInteger('total_balance')->unsigned()->default(0)->nullable()->comment('总余额');
             $table->string('sign', 64)->nullable()->comment('签名');
             $table->primary(['wallet_id', 'unit_id']);
