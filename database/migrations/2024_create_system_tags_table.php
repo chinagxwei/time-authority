@@ -13,21 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('system_tags', function (Blueprint $table) {
             $table->uuid('id')->unsigned();
-            $table->string('title', 128)->comment('标题');
-            $table->text('content')->comment('内容');
-            $table->tinyInteger('weight')->unsigned()->default(1)->nullable()->comment('消息重要程度 1一般 2重要 3很重要');
-            $table->smallInteger('user_type')
-                ->unsigned()
-                ->default(5)
-                ->comment('用户类型 1一般用户 10企业理员 100平台管理员 999超级管理员');
+            $table->string('title', 64)->nullable()->comment('标题');
             $table->integer('created_at')->unsigned()->nullable();
             $table->integer('updated_at')->unsigned()->nullable();
             $table->integer('created_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('updated_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('deleted_at')->unsigned()->nullable();
-            $table->comment('系统消息表');
+            $table->comment('标签表');
         });
     }
 
@@ -38,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('system_tags');
     }
 };

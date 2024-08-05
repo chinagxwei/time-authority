@@ -13,18 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('complaints', function (Blueprint $table) {
+        Schema::create('system_agreements', function (Blueprint $table) {
             $table->uuid('id')->unique()->primary();
             $table->string('title',128)->nullable()->comment('标题');
             $table->text('content')->nullable()->comment('内容');
             $table->tinyInteger('type')->default(0)->nullable()->comment('类型');
-            $table->tinyInteger('status')->default(0)->nullable()->comment('状态 0 未处理 1 已处理');
+            $table->tinyInteger('show')->unsigned()->default(0)->nullable()->comment('是否显示 0不显示 1显示');
             $table->integer('created_at')->unsigned()->nullable();
             $table->integer('updated_at')->unsigned()->nullable();
             $table->integer('created_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('updated_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('deleted_at')->unsigned()->nullable();
-            $table->comment('系统投诉表');
+            $table->comment('系统协议表');
         });
     }
 
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('complaints');
+        Schema::dropIfExists('system_agreements');
     }
 };

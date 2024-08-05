@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('role_navigations', function (Blueprint $table) {
-            $table->integer('role_id')->unsigned();
-            $table->integer('navigation_id')->unsigned();
-            $table->primary(['role_id', 'navigation_id']);
-            $table->comment('管理员角色菜单表');
+        Schema::create('schedules_topics', function (Blueprint $table) {
+            $table->uuid('schedule_id')->unsigned();
+            $table->uuid('tag_id')->unsigned();
+            $table->primary(['schedule_id', 'tag_id']);
+            $table->comment('日程话题表');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('role_navigations');
+        Schema::dropIfExists('schedules_topics');
     }
 };

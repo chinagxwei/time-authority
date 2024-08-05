@@ -13,20 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('navigations', function (Blueprint $table) {
+        Schema::create('system_routers', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->integer('parent_id')->index()->unsigned()->nullable()->comment('父导航ID');
-            $table->string('navigation_name', 64)->comment('导航名称');
-            $table->string('navigation_link', 64)->nullable()->comment('导航链接');
-            $table->tinyInteger('menu_show')->unsigned()->default(1)->nullable()->comment('菜单显示');
-            $table->integer('navigation_sort')->unsigned()->nullable()->comment('导航排序');
-            $table->string('icon', 64)->nullable()->comment('导航图标');
+            $table->string('router_name', 64)->comment('导航名称');
+            $table->string('router', 128)->nullable()->unique()->comment('路由');
             $table->integer('created_at')->unsigned()->nullable();
             $table->integer('updated_at')->unsigned()->nullable();
             $table->integer('created_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('updated_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('deleted_at')->unsigned()->nullable();
-            $table->comment('平台导航表');
+            $table->comment('平台路由表');
         });
     }
 
@@ -37,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('navigations');
+        Schema::dropIfExists('system_routers');
     }
 };
