@@ -5,6 +5,7 @@ namespace App\Models\System;
 use App\Models\Relation\CreatedRelation;
 use App\Models\Relation\UpdatedRelation;
 use App\Models\SystemBaseModel;
+use App\Models\Trait\Build\System\SystemUnitBuild;
 use App\Models\Trait\SearchTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,7 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class SystemUnit extends SystemBaseModel
 {
-    use HasFactory, SoftDeletes, CreatedRelation, UpdatedRelation, SearchTrait;
+    use HasFactory, SoftDeletes, SystemUnitBuild, CreatedRelation, UpdatedRelation, SearchTrait;
 
     protected $table = 'system_units';
     /**

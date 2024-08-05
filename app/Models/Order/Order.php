@@ -42,9 +42,8 @@ use Illuminate\Support\Carbon;
 class Order extends SystemBaseModel
 {
     use HasFactory, SoftDeletes, Uuids,
-        CreatedRelation, UpdatedRelation,
-        MemberRelation, UnitRelation,
-        SearchTrait, SignTrait, OrderBuild;
+        OrderBuild, CreatedRelation, UpdatedRelation,
+        MemberRelation, UnitRelation, SearchTrait, SignTrait;
 
     protected $table = 'orders';
 

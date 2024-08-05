@@ -8,6 +8,7 @@ use App\Models\Relation\CreatedRelation;
 use App\Models\Relation\UpdatedRelation;
 use App\Models\Relation\WalletRelation;
 use App\Models\SystemBaseModel;
+use App\Models\Trait\Build\Member\MemberBuild;
 use App\Models\Trait\SearchTrait;
 use App\Models\Wallet\Wallet;
 use Carbon\Carbon;
@@ -41,7 +42,7 @@ use Illuminate\Support\Collection;
  */
 class Member extends SystemBaseModel
 {
-    use HasFactory, SoftDeletes, Uuids, SearchTrait, WalletRelation, CreatedRelation, UpdatedRelation;
+    use HasFactory, SoftDeletes, Uuids, MemberBuild, SearchTrait, WalletRelation, CreatedRelation, UpdatedRelation;
 
     protected $table = 'members';
 

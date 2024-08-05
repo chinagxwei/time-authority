@@ -5,6 +5,7 @@ namespace App\Models\Order;
 use App\Models\Relation\CreatedRelation;
 use App\Models\Relation\UpdatedRelation;
 use App\Models\SystemBaseModel;
+use App\Models\Trait\Build\Order\OrderRevenuesConfigBuild;
 use App\Models\Trait\SearchTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,7 +22,7 @@ use Illuminate\Support\Carbon;
  */
 class OrderRevenuesConfig extends SystemBaseModel
 {
-    use HasFactory, SoftDeletes, CreatedRelation, UpdatedRelation, SearchTrait;
+    use HasFactory, SoftDeletes, OrderRevenuesConfigBuild, CreatedRelation, UpdatedRelation, SearchTrait;
 
     protected $table = 'order_revenue_configs';
     /**

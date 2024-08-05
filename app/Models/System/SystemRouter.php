@@ -5,6 +5,7 @@ namespace App\Models\System;
 use App\Models\Relation\CreatedRelation;
 use App\Models\Relation\UpdatedRelation;
 use App\Models\SystemBaseModel;
+use App\Models\Trait\Build\System\SystemRouterBuild;
 use App\Models\Trait\SearchTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,7 +20,7 @@ use Illuminate\Support\Carbon;
  */
 class SystemRouter extends SystemBaseModel
 {
-    use HasFactory, SoftDeletes, CreatedRelation, UpdatedRelation, SearchTrait;
+    use HasFactory, SoftDeletes, SystemRouterBuild, CreatedRelation, UpdatedRelation, SearchTrait;
 
     public const USER_ROUTER_KEY = "user_system_routers";
 
@@ -51,7 +52,8 @@ class SystemRouter extends SystemBaseModel
     /**
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|static[]
      */
-    public static function getAll(){
+    public static function getAll()
+    {
         return self::query()->select(['router'])->get();
     }
 
