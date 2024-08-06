@@ -6,6 +6,7 @@ namespace App\Models\System;
 use App\Models\Relation\CreatedRelation;
 use App\Models\Relation\UpdatedRelation;
 use App\Models\SystemBaseModel;
+use App\Models\Trait\Build\System\SystemAgreementBuild;
 use App\Models\Trait\SearchTrait;
 use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,7 +24,7 @@ use Illuminate\Support\Carbon;
  */
 class SystemAgreement extends SystemBaseModel
 {
-    use HasFactory, SoftDeletes, Uuids, CreatedRelation, UpdatedRelation, SearchTrait;
+    use HasFactory, SoftDeletes, Uuids, SystemAgreementBuild, CreatedRelation, UpdatedRelation, SearchTrait;
 
     protected $table = 'system_agreements';
 

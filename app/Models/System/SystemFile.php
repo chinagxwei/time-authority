@@ -5,6 +5,7 @@ namespace App\Models\System;
 use App\Models\Relation\CreatedRelation;
 use App\Models\Relation\UpdatedRelation;
 use App\Models\SystemBaseModel;
+use App\Models\Trait\Build\System\SystemFileBuild;
 use App\Models\Trait\SearchTrait;
 use Carbon\Carbon;
 use Emadadly\LaravelUuid\Uuids;
@@ -22,7 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class SystemFile extends SystemBaseModel
 {
-    use HasFactory, SoftDeletes, Uuids, CreatedRelation, UpdatedRelation, SearchTrait;
+    use HasFactory, SoftDeletes, Uuids, SystemFileBuild, CreatedRelation, UpdatedRelation, SearchTrait;
 
     protected $table = 'system_files';
 

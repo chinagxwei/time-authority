@@ -6,6 +6,7 @@ use App\Models\Member\Member;
 use App\Models\Relation\CreatedRelation;
 use App\Models\Relation\UpdatedRelation;
 use App\Models\SystemBaseModel;
+use App\Models\Trait\Build\Order\OrderRevenuesBuild;
 use App\Models\Trait\SearchTrait;
 use App\Models\Trait\SignTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -28,7 +29,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class OrderRevenues extends SystemBaseModel
 {
-    use HasFactory, SoftDeletes, CreatedRelation, UpdatedRelation, SearchTrait, SignTrait;
+    use HasFactory, SoftDeletes, OrderRevenuesBuild, CreatedRelation, UpdatedRelation, SearchTrait, SignTrait;
 
     protected $table = 'order_revenues';
     /**

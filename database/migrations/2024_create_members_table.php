@@ -24,6 +24,9 @@ return new class extends Migration
             $table->string('remark',128)->nullable()->comment('备注');
             $table->string('mobile',18)->index()->nullable()->comment('联系电话');
             $table->integer('login_at')->unsigned()->nullable();
+            $table->uuid('parent_id')->index()->nullable()->comment('父会员ID');
+            $table->tinyInteger('node_level')->unsigned()->default(0)->nullable()->comment('节点层级');
+            $table->text('belong_agent_node')->nullable()->comment('属于代理节点');
             $table->integer('created_at')->unsigned()->nullable();
             $table->integer('updated_at')->unsigned()->nullable();
             $table->integer('created_by')->index()->unsigned()->nullable()->comment('用户ID');

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\SystemBaseModel;
+use App\Services\System\RouterCheckService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -10,6 +11,10 @@ class AppServiceProvider extends ServiceProvider
 
     protected $observes = [
 
+    ];
+
+    protected $services = [
+        RouterCheckService::class,
     ];
 
     /**
@@ -26,7 +31,13 @@ class AppServiceProvider extends ServiceProvider
         foreach ($this->observes as $model => $observers){
             $model::observe($observers);
         }
-    }
+
+        foreach ($this->services as $service){
+            $this->app->singleton($service, function () use ($service){
+                return new $service();
+            });
+        }
+   }
 
     /**
      * Bootstrap any application services.

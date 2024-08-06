@@ -4,6 +4,7 @@ namespace App\Models\System;
 
 use App\Models\Relation\CreatedRelation;
 use App\Models\SystemBaseModel;
+use App\Models\Trait\Build\System\SystemComplaintBuild;
 use App\Models\Trait\SearchTrait;
 use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,7 +22,7 @@ use Illuminate\Support\Carbon;
  */
 class SystemComplaint extends SystemBaseModel
 {
-    use HasFactory, SoftDeletes, Uuids, CreatedRelation, SearchTrait;
+    use HasFactory, SoftDeletes, Uuids, SystemComplaintBuild, CreatedRelation, SearchTrait;
 
     protected $table = 'system_complaints';
 
