@@ -59,6 +59,6 @@ class SystemConfig extends SystemBaseModel
         if (!empty($this->value)) {
             $build = $build->where('value', 'like', "%{$this->value}%");
         }
-        return $build->with($with)->orderBy('id', 'desc');
+        return $build->with($with);
     }
 }

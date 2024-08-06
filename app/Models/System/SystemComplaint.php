@@ -60,6 +60,6 @@ class SystemComplaint extends SystemBaseModel
         if (!empty($this->content)) {
             $build = $build->where('content', 'like', "%{$this->content}%");
         }
-        return $build->with($with)->orderBy('id', 'desc');
+        return $build->with($with);
     }
 }

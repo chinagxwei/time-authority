@@ -67,6 +67,6 @@ class SystemAgreement extends SystemBaseModel
         if (isset($this->show)) {
             $build = $build->where('show', $this->show);
         }
-        return $build->with($with)->orderBy('id', 'desc');
+        return $build->with($with);
     }
 }

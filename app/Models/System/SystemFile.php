@@ -61,6 +61,6 @@ class SystemFile extends SystemBaseModel
         if (!empty($this->description)) {
             $build = $build->where('description', 'like', "%{$this->description}%");
         }
-        return $build->with($with)->orderBy('id', 'desc');
+        return $build->with($with);
     }
 }

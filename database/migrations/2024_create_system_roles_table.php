@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('system_roles', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('role_name', 128)->comment('角色名称');
+            $table->smallInteger('role_type')->unsigned()->comment('角色类型');
             $table->integer('created_at')->unsigned()->nullable();
             $table->integer('updated_at')->unsigned()->nullable();
             $table->integer('created_by')->index()->unsigned()->nullable()->comment('用户ID');
