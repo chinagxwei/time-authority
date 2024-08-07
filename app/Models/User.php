@@ -20,7 +20,6 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property string email_verified_at
  * @property string password
  * @property string remember_token
- * @property int user_type
  * @property int login_at
  * @property Carbon created_at
  * @property Carbon updated_at
@@ -30,12 +29,6 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable, SearchTrait;
-
-    const USER_TYPE_MEMBER = 1;
-
-    const USER_TYPE_PLATFORM_MANAGER = 100;
-
-    const USER_TYPE_PLATFORM_SUPER_ADMIN = 999;
 
     /**
      * The attributes that are mass assignable.
@@ -107,41 +100,13 @@ class User extends Authenticatable implements JWTSubject
 
     /**
      * @param $param
-     * @param $role_type
      * @return bool
      */
-    public function register($param, $role_type)
+    public function register($param)
     {
         $param['email'] = "{$param['username']}@platform.com";
         $param['password'] = bcrypt($param['password']);
-        $param['user_type'] = $role_type;
         return $this->fill($param)->save();
-    }
-
-    /**
-     * @param $param
-     * @return bool
-     */
-    public function registerManager($param)
-    {
-        return $this->register($param, self::USER_TYPE_PLATFORM_MANAGER);
-    }
-
-    /**
-     * @param $param
-     * @return bool
-     */
-    public function registerMember($param)
-    {
-        return $this->register($param, self::USER_TYPE_MEMBER);
-    }
-
-    /**
-     * @return bool
-     */
-    public function isSuperAdmin()
-    {
-        return self::USER_TYPE_PLATFORM_SUPER_ADMIN === $this->user_type;
     }
 
     /**
@@ -159,9 +124,6 @@ class User extends Authenticatable implements JWTSubject
         }
         if (!empty($this->email)) {
             $build = $build->where('email', 'like', "%{$this->email}%");
-        }
-        if (isset($this->user_type)) {
-            $build = $build->where('user_type', $this->user_type);
         }
         return $build->with($with);
     }

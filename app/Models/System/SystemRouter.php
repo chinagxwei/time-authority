@@ -69,6 +69,6 @@ class SystemRouter extends SystemBaseModel
             $build = $build->where('router', 'like', "%{$this->router}%");
         }
 
-        return $build->with($with)->orderBy('id', 'desc');
+        return $build->with($with);
     }
 }

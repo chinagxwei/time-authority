@@ -5,6 +5,7 @@ namespace App\Models\System;
 use App\Models\Relation\CreatedRelation;
 use App\Models\Relation\UpdatedRelation;
 use App\Models\SystemBaseModel;
+use App\Models\Trait\Build\System\SystemRolesBuild;
 use App\Models\Trait\SearchTrait;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,6 +16,7 @@ use Illuminate\Support\Collection;
 /**
  * @property int id
  * @property string role_name
+ * @property int role_type
  * @property int created_by
  * @property Carbon created_at
  * @property User user
@@ -23,7 +25,7 @@ use Illuminate\Support\Collection;
  */
 class SystemRole extends SystemBaseModel
 {
-    use HasFactory, SoftDeletes, CreatedRelation, UpdatedRelation, SearchTrait;
+    use HasFactory, SoftDeletes, SystemRolesBuild, CreatedRelation, UpdatedRelation, SearchTrait;
 
     protected $table = 'system_roles';
 
@@ -43,12 +45,26 @@ class SystemRole extends SystemBaseModel
 
 
     protected $fillable = [
-        'role_name', 'created_by', 'updated_by'
+        'role_name', 'role_type', 'created_by', 'updated_by'
     ];
 
     protected $hidden = [
         'deleted_at', 'updated_at'
     ];
+
+    const USER_TYPE_MEMBER = 1;
+
+    const USER_TYPE_PLATFORM_MANAGER = 100;
+
+    const USER_TYPE_PLATFORM_SUPER_ADMIN = 999;
+
+    /**
+     * @return bool
+     */
+    public function isSuperAdmin()
+    {
+        return self::USER_TYPE_PLATFORM_SUPER_ADMIN === $this->user_type;
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -84,7 +100,10 @@ class SystemRole extends SystemBaseModel
         if (!empty($this->role_name)) {
             $build = $build->where('role_name', 'like', "%{$this->role_name}%");
         }
-        return $build->with($with)->orderBy('id', 'desc');
+        if (!empty($this->role_type)) {
+            $build = $build->where('role_type', $this->role_type);
+        }
+        return $build->with($with);
     }
 
     /**

@@ -70,6 +70,6 @@ class SystemAdmin extends SystemBaseModel
         if (!empty($this->role_id)) {
             $build = $build->where('role_id', $this->role_id);
         }
-        return $build->with($with)->orderBy('id', 'desc');
+        return $build->with($with);
     }
 }

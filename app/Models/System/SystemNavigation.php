@@ -86,7 +86,10 @@ class SystemNavigation extends SystemBaseModel
                 'navigation_link', 'menu_show', 'icon', 'navigation_sort'
             ])->where(function ($query) {
                 $query->orWhereNull('parent_id')->orWhere('parent_id', 0);
-            })->with($with)->orderBy('navigation_sort')->get();
+            })
+            ->with($with)
+            ->orderBy('navigation_sort')
+            ->get();
     }
 
     /**
@@ -94,7 +97,7 @@ class SystemNavigation extends SystemBaseModel
      * @param $with
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|static[]
      */
-    public static function findOneByParent($parent_id, $with = [])
+    public static function findByParent($parent_id, $with = [])
     {
         return self::query()
             ->select([
@@ -114,7 +117,7 @@ class SystemNavigation extends SystemBaseModel
         if ($this->navigation_name) {
             $build = $build->where('navigation_name', 'like', "%{$this->navigation_name}%");
         }
-        return $build->with($with)->orderBy('id', 'desc');
+        return $build->with($with);
     }
 
     /**

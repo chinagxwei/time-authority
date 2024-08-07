@@ -72,6 +72,6 @@ class SystemMessage extends SystemBaseModel
         if (isset($this->user_type)) {
             $build = $build->where('user_type', $this->user_type);
         }
-        return $build->with($with)->orderBy('id', 'desc');
+        return $build->with($with);
     }
 }
