@@ -35,6 +35,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 1,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ],
@@ -46,6 +47,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 0,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ],
@@ -57,6 +59,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 0,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ]
@@ -74,6 +77,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 1,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ],
@@ -85,6 +89,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 0,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ],
@@ -102,6 +107,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 1,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ],
@@ -119,6 +125,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 1,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ]
@@ -136,6 +143,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 1,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ]
@@ -153,6 +161,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 1,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ]
@@ -170,6 +179,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 1,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ],
@@ -181,6 +191,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 0,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ],
@@ -192,6 +203,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 0,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ]
@@ -209,6 +221,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 1,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ],
@@ -220,6 +233,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 0,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ],
@@ -231,6 +245,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 0,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ]
@@ -248,6 +263,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 1,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ],
@@ -259,6 +275,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 0,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ],
@@ -270,6 +287,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 0,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ]
@@ -287,6 +305,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 1,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ]
@@ -304,6 +323,7 @@ class BaseSystemNavigationData implements BaseData
                 'menu_show' => 1,
                 'icon' => 'line-chart',
                 'created_by' => $created_by,
+                'updated_by' => $created_by,
                 'created_at' => $time,
                 'updated_at' => $time
             ]

@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('password_resets', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
+            $table->string('email',128)->primary();
+            $table->string('token',128);
             $table->timestamp('created_at')->nullable();
+            $table->comment('重置密码表');
         });
     }
 

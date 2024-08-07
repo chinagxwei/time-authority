@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('member_messages', function (Blueprint $table) {
-            $table->uuid('member_id')->unsigned();
-            $table->uuid('message_id')->unsigned();
+            $table->uuid('member_id');
+            $table->uuid('message_id');
             $table->primary(['member_id', 'message_id']);
             $table->comment('会员消息表');
         });

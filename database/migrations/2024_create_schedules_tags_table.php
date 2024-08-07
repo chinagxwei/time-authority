@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('schedules_tags', function (Blueprint $table) {
-            $table->uuid('schedule_id')->unsigned();
-            $table->uuid('tag_id')->unsigned();
+            $table->uuid('schedule_id');
+            $table->uuid('tag_id');
             $table->primary(['schedule_id', 'tag_id']);
             $table->comment('日程标签表');
         });

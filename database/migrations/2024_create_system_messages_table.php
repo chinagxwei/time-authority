@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('system_messages', function (Blueprint $table) {
-            $table->uuid('id')->unsigned();
+            $table->uuid('id');
             $table->string('title', 128)->comment('标题');
             $table->text('content')->comment('内容');
             $table->tinyInteger('weight')->unsigned()->default(1)->nullable()->comment('消息重要程度 1一般 2重要 3很重要');

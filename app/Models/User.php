@@ -30,6 +30,8 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable, SearchTrait;
 
+    protected $dateFormat = 'U';
+
     /**
      * The attributes that are mass assignable.
      *

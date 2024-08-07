@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('system_tags', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->string('title', 64)->nullable()->comment('标题');
+        Schema::create('location_area', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
+            $table->string('title', 128)->index()->nullable()->comment('标题');
             $table->integer('created_at')->unsigned()->nullable();
             $table->integer('updated_at')->unsigned()->nullable();
             $table->integer('created_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('updated_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('deleted_at')->unsigned()->nullable();
-            $table->comment('标签表');
+            $table->comment('区域表');
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('system_tags');
+        Schema::dropIfExists('location_area');
     }
 };

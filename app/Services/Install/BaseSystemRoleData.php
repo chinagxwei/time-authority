@@ -16,6 +16,15 @@ class BaseSystemRoleData implements BaseData
                 'role_name' => '超级管理员',
                 'role_type' => SystemRole::USER_TYPE_PLATFORM_SUPER_ADMIN,
                 'created_by' => $params[0],
+                'updated_by' => $params[0],
+                'created_at' => $time,
+                'updated_at' => $time
+            ],
+            [
+                'role_name' => '普通管理员',
+                'role_type' => SystemRole::USER_TYPE_PLATFORM_MANAGER,
+                'created_by' => $params[0],
+                'updated_by' => $params[0],
                 'created_at' => $time,
                 'updated_at' => $time
             ],
@@ -23,6 +32,7 @@ class BaseSystemRoleData implements BaseData
                 'role_name' => '会员',
                 'role_type' => SystemRole::USER_TYPE_MEMBER,
                 'created_by' => $params[0],
+                'updated_by' => $params[0],
                 'created_at' => $time,
                 'updated_at' => $time
             ],

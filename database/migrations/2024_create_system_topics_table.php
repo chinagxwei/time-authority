@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('system_topics', function (Blueprint $table) {
-            $table->uuid('id')->unsigned();
+            $table->uuid('id');
             $table->string('title', 64)->nullable()->comment('标题');
             $table->integer('created_at')->unsigned()->nullable();
             $table->integer('updated_at')->unsigned()->nullable();

@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('member_tags', function (Blueprint $table) {
-            $table->uuid('member_id')->unsigned();
-            $table->uuid('tag_id')->unsigned();
+            $table->uuid('member_id');
+            $table->uuid('tag_id');
             $table->primary(['member_id', 'tag_id']);
             $table->comment('会员标签表');
         });

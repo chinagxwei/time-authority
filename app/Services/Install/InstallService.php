@@ -6,6 +6,7 @@ use App\Models\System\SystemAdmin;
 use App\Models\System\SystemNavigation;
 use App\Models\System\SystemRole;
 use App\Models\System\SystemRouter;
+use App\Models\System\SystemUnit;
 use App\Services\User\SystemAdminService;
 use function Symfony\Component\Translation\t;
 
@@ -24,6 +25,8 @@ class InstallService
         if ($this->admin) {
             $this->initRouter();
             $this->initMenu();
+            $this->initRole();
+            $this->initUnit();
         } else {
             throw new \Exception('create admin error');
         }
@@ -58,5 +61,19 @@ class InstallService
         $systemData = (new BaseSystemNavigationData)->getData([$systemMenus->id, $this->admin->created_by]);
 
         SystemNavigation::query()->insert($systemData);
+    }
+
+    private function initRole()
+    {
+        $data = (new BaseSystemRoleData)->getData([$this->admin->created_by]);
+
+        SystemRole::query()->insert($data);
+    }
+
+    private function initUnit()
+    {
+        $data = (new BaseSystemUnitData)->getData([$this->admin->created_by]);
+
+        SystemUnit::query()->insert($data);
     }
 }

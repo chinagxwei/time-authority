@@ -60,7 +60,6 @@ class SystemAdminService implements UserCommonInterface
             'username' => $this->username,
             'email' => $this->email,
             'password' => $this->password,
-            'user_type' => $this->user_type ?? SystemRole::USER_TYPE_PLATFORM_MANAGER,
         ];
 
         $user = new \App\Models\User();
@@ -69,7 +68,7 @@ class SystemAdminService implements UserCommonInterface
 
         return $user->admin()
             ->save(
-                new SystemAdmin(['nickname' => 'admin', 'role_id' => $this->role_id])
+                new SystemAdmin(['nickname' => 'admin', 'role_id' => 1])
             ) ? $user->admin : null;
     }
 
