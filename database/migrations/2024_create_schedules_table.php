@@ -21,6 +21,7 @@ return new class extends Migration
             $table->tinyInteger('ended_weeks')->unsigned()->nullable()->comment('结束周数');
             $table->integer('started_at')->unsigned()->nullable()->comment('开始时间');
             $table->integer('ended_at')->unsigned()->nullable()->comment('结束时间');
+            $table->text('location')->nullable()->comment('位置');
             $table->text('remark')->nullable()->comment('备注');
             $table->tinyInteger('loop')->unsigned()->nullable()->comment('重复 0不重复 1每日 2每周 3每月');
             $table->tinyInteger('tips')->unsigned()->nullable()->comment('提醒 0不提醒 1提醒');
@@ -33,7 +34,7 @@ return new class extends Migration
             $table->integer('created_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('updated_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('deleted_at')->unsigned()->nullable();
-            $table->comment('会员日程安排表');
+            $table->comment('日程安排表');
         });
     }
 
