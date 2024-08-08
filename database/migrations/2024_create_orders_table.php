@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('third_party_merchant_id',18)->nullable()->comment('第三方支付商户号');
             $table->tinyInteger('order_category')->unsigned()->default(0)->comment('订单类型 1VIP订单 2提款订单 3佣金订单');
             $table->uuid('wallet_id')->index()->nullable()->comment('钱包ID');
-            $table->tinyInteger('pay_method')->unsigned()->default(0)->comment('支付方式 1支付宝 2微信 3虚拟账户');
+            $table->tinyInteger('pay_method')->unsigned()->default(0)->comment('支付方式 1支付宝 2微信 3虚拟账户 10平台');
             $table->integer('unit_id')->unsigned()->default(0)->comment('单位ID');
             $table->integer('pay_at')->unsigned()->default(0)->comment('支付时间');
             $table->tinyInteger('pay_status')->default(0)->comment('支付状态 -1 取消 0 未支付 1 支付中 2 已支付');

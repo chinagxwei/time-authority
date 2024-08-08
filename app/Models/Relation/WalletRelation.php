@@ -11,7 +11,7 @@ use App\Models\Wallet\Wallet;
  */
 trait WalletRelation
 {
-    public function setWallet($wallet_id){
+    public function setWalletID($wallet_id){
         $this->wallet_id = $wallet_id;
         return $this;
     }

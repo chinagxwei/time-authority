@@ -5,48 +5,8 @@ namespace App\Services\User;
 use App\Models\System\SystemAdmin;
 use App\Models\System\SystemRole;
 
-class SystemAdminService implements UserCommonInterface
+class SystemAdminService extends UserCommonInterface
 {
-    private $username;
-
-    private $password;
-
-    private $email;
-
-    private $role_id;
-
-    private $user_type;
-
-
-    public function setUsername($username)
-    {
-        $this->username = $username;
-        return $this;
-    }
-
-    public function setPassword($password)
-    {
-        $this->password = bcrypt($password);
-        return $this;
-    }
-
-    public function setRoleId($role_id)
-    {
-        $this->role_id = $role_id;
-        return $this;
-    }
-
-    public function setUserType($user_type)
-    {
-        $this->user_type = $user_type;
-        return $this;
-    }
-
-    public function setEmail($email)
-    {
-        $this->email = $email;
-        return $this;
-    }
 
     public function register()
     {
@@ -68,7 +28,7 @@ class SystemAdminService implements UserCommonInterface
 
         return $user->admin()
             ->save(
-                new SystemAdmin(['nickname' => 'admin', 'role_id' => 1])
+                new SystemAdmin(['nickname' => 'admin', 'role_id' => $this->role_id])
             ) ? $user->admin : null;
     }
 

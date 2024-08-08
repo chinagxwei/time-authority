@@ -4,6 +4,7 @@ namespace App\Models\Trait\Build\Member;
 
 /**
  * @property string wallet_id
+ * @property int role_id
  * @property string organization_id
  * @property int order_revenue_config_id
  * @property string nickname
@@ -81,6 +82,11 @@ trait MemberBuild
 
     public function setRegisterType($register_type){
         $this->register_type = $register_type;
+        return $this;
+    }
+
+    public function setRoleId($role_id){
+        $this->role_id = $role_id;
         return $this;
     }
 }

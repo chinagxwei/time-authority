@@ -11,7 +11,7 @@ use App\Models\System\SystemUnit;
  */
 trait UnitRelation
 {
-    public function setUnit($unit_id)
+    public function setUnitID($unit_id)
     {
         $this->unit_id = $unit_id;
         return $this;

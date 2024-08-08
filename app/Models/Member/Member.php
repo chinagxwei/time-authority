@@ -21,6 +21,7 @@ use Illuminate\Support\Collection;
 /**
  * @property string id
  * @property string wallet_id
+ * @property int role_id
  * @property string organization_id
  * @property int order_revenue_config_id
  * @property string nickname
@@ -62,8 +63,8 @@ class Member extends SystemBaseModel
     protected $dateFormat = 'U';
 
     protected $fillable = [
-        'wallet_id', 'order_income_config_id', 'organization_id',
-        'nickname', 'avatar', 'mobile', 'remark', 'develop',
+        'wallet_id', 'order_revenue_config_id', 'organization_id',
+        'role_id', 'nickname', 'avatar', 'mobile', 'remark', 'develop',
         'promotion_sn', 'parent_id', 'belong_agent_node',
         'register_type', 'created_by', 'updated_by'
     ];

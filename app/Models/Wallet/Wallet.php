@@ -14,6 +14,7 @@ use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @property string id
@@ -86,8 +87,12 @@ class Wallet extends SystemBaseModel
     public static function lastOne()
     {
         return self::query()->whereNotExists(function ($query) {
+            $raw = [
+                DB::getTablePrefix() . 'members.wallet_id',
+                DB::getTablePrefix() . 'wallets.id'
+            ];
             $query->from('members')
-                ->whereRaw('hc_members.wallet_id = hc_wallets.id');
+                ->whereRaw(join('=', $raw));
         })->lock()->first();
     }
 
@@ -114,7 +119,7 @@ class Wallet extends SystemBaseModel
     {
         // TODO: Implement setSign() method.
         $raw = [
-             "wallet_$this->created_by",
+            "wallet_$this->created_by",
         ];
 
         $this->sign = sha1(join('_', $raw));

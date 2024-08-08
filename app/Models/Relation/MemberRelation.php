@@ -10,7 +10,7 @@ use App\Models\Member\Member;
  */
 trait MemberRelation
 {
-    public function setMember($member_id)
+    public function setMemberID($member_id)
     {
         $this->member_id = $member_id;
         return $this;

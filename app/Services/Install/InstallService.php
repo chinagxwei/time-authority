@@ -2,11 +2,13 @@
 
 namespace App\Services\Install;
 
+use App\Models\Order\OrderRevenuesConfig;
 use App\Models\System\SystemAdmin;
 use App\Models\System\SystemNavigation;
 use App\Models\System\SystemRole;
 use App\Models\System\SystemRouter;
 use App\Models\System\SystemUnit;
+use App\Services\User\MemberService;
 use App\Services\User\SystemAdminService;
 use function Symfony\Component\Translation\t;
 
@@ -27,6 +29,8 @@ class InstallService
             $this->initMenu();
             $this->initRole();
             $this->initUnit();
+            $this->initCommissionRatio();
+            $this->initMember();
         } else {
             throw new \Exception('create admin error');
         }
@@ -41,7 +45,7 @@ class InstallService
             ->setEmail('admin@system.com')
             ->setUsername('admin')
             ->setPassword('admin123456')
-            ->setUserType(SystemRole::USER_TYPE_PLATFORM_SUPER_ADMIN)
+            ->setRoleId(1)
             ->register();
     }
 
@@ -75,5 +79,20 @@ class InstallService
         $data = (new BaseSystemUnitData)->getData([$this->admin->created_by]);
 
         SystemUnit::query()->insert($data);
+    }
+
+    private function initCommissionRatio()
+    {
+        $data = (new BaseSystemCommissionRatioData)->getData([$this->admin->created_by]);
+
+        OrderRevenuesConfig::query()->insert($data);
+    }
+
+    private function initMember()
+    {
+        (new MemberService())->setUsername('test')
+            ->setPassword('test123456')
+            ->setRoleId(3)
+            ->register();
     }
 }

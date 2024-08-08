@@ -6,35 +6,14 @@ use App\Models\Member\Member;
 use App\Models\System\SystemUnit;
 use App\Models\Wallet\Wallet;
 
-class MemberService implements UserCommonInterface
+class MemberService extends UserCommonInterface
 {
-    private $username;
-
-    private $password;
 
     private $nickname;
 
     private $mobile;
 
-    private $role_id;
-
-    public function setUsername($username)
-    {
-        $this->username = $username;
-        return $this;
-    }
-
-    public function setPassword($password)
-    {
-        $this->password = bcrypt($password);
-        return $this;
-    }
-
-    public function setRoleId($role_id)
-    {
-        $this->role_id = $role_id;
-        return $this;
-    }
+    private $order_revenue_config_id;
 
     public function setNickname($nickname)
     {
@@ -48,6 +27,12 @@ class MemberService implements UserCommonInterface
         return $this;
     }
 
+    public function setOrderRevenueConfigId($order_revenue_config_id)
+    {
+        $this->order_revenue_config_id = $order_revenue_config_id;
+        return $this;
+    }
+
     public function register()
     {
         // TODO: Implement register() method.
@@ -57,7 +42,7 @@ class MemberService implements UserCommonInterface
 
         $baseUser = [
             'username' => $this->username,
-            'email' => "{$this->username}@platform.com",
+            'email' => $this->email ?? "{$this->username}@platform.com",
             'password' => $this->password,
         ];
 
@@ -106,12 +91,13 @@ class MemberService implements UserCommonInterface
                         'sign' => md5("{$wallet->id}_0_0")
                     ]);
                 });
-
             return new Member([
                 'nickname' => $this->nickname ?? 'member_' . mt_rand(100000, 999999),
                 'role_id' => $this->role_id,
+                'order_revenue_config_id' => $this->order_revenue_config_id ?? 1,
                 'wallet_id' => $wallet->id,
-                'mobile' => $this->mobile ?? null
+                'mobile' => $this->mobile ?? null,
+                'promotion_sn' => md5('member_' . $wallet->id . '_' . mt_rand(100000, 999999))
             ]);
         }
 
