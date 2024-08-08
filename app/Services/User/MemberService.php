@@ -36,22 +36,22 @@ class MemberService implements UserCommonInterface
         return $this;
     }
 
-    public function setUserType($user_type)
+    public function setNickname($nickname)
     {
-        $this->user_type = $user_type;
+        $this->nickname = $nickname;
         return $this;
     }
 
-    public function setEmail($email)
+    public function setMobile($mobile)
     {
-        $this->email = $email;
+        $this->mobile = $mobile;
         return $this;
     }
 
     public function register()
     {
         // TODO: Implement register() method.
-        if (!$this->username || !$this->password || !$this->email) {
+        if (!$this->username || !$this->password) {
             throw new \Exception('admin params error');
         }
 
@@ -108,8 +108,8 @@ class MemberService implements UserCommonInterface
                 });
 
             return new Member([
-                'nickname' => 'test_member',
-                'role_id' => 3,
+                'nickname' => $this->nickname ?? 'member_' . mt_rand(100000, 999999),
+                'role_id' => $this->role_id,
                 'wallet_id' => $wallet->id,
                 'mobile' => $this->mobile ?? null
             ]);
