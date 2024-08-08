@@ -20,17 +20,13 @@ namespace App\Models\Trait\Build\Member;
  */
 trait MemberBuild
 {
-    public function setWalletId($wallet_id){
-        $this->wallet_id = $wallet_id;
-        return $this;
-    }
 
-    public function setOrganizationId($organization_id){
+    public function setOrganizationID($organization_id){
         $this->organization_id = $organization_id;
         return $this;
     }
 
-    public function setOrderRevenueConfigId($order_revenue_config_id){
+    public function setOrderRevenueConfigID($order_revenue_config_id){
         $this->order_revenue_config_id = $order_revenue_config_id;
         return $this;
     }
@@ -85,7 +81,7 @@ trait MemberBuild
         return $this;
     }
 
-    public function setRoleId($role_id){
+    public function setRoleID($role_id){
         $this->role_id = $role_id;
         return $this;
     }
