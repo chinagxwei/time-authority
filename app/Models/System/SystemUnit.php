@@ -65,4 +65,12 @@ class SystemUnit extends SystemBaseModel
 
         return $build->with($with);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function findAllFinance()
+    {
+        return self::query()->where('finance', 1)->get();
+    }
 }

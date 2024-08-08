@@ -5,6 +5,7 @@ namespace App\Models\Wallet;
 use App\Models\Member\Member;
 use App\Models\Relation\CreatedRelation;
 use App\Models\Relation\UpdatedRelation;
+use App\Models\System\SystemUnit;
 use App\Models\SystemBaseModel;
 use App\Models\Trait\SearchTrait;
 use App\Models\Trait\SignTrait;
@@ -21,6 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int updated_by
  * @property Carbon created_at
  * @property Member own
+ * @property WalletUnitBalance unitBalance
  */
 class Wallet extends SystemBaseModel
 {
@@ -68,6 +70,16 @@ class Wallet extends SystemBaseModel
         return $this->hasOne(Member::class, 'wallet_id', 'id');
     }
 
+    public function unitBalance()
+    {
+        return $this->belongsToMany(
+            SystemUnit::class,
+            'wallet_unit_balance',
+            'wallet_id',
+            'unit_id'
+        )->using(WalletUnitBalance::class)->withPivot('cumulative_amount', 'total_balance');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Builder|Model|object|null|static
      */
@@ -95,14 +107,14 @@ class Wallet extends SystemBaseModel
     {
         $model = new static();
         $model->setSign();
-        return $model->save() ? $model : null;
+        return $model->save() ? self::lastOne() : null;
     }
 
     function setSign()
     {
         // TODO: Implement setSign() method.
         $raw = [
-            $this->created_by ?? '',
+             "wallet_$this->created_by",
         ];
 
         $this->sign = sha1(join('_', $raw));
