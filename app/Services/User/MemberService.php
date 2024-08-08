@@ -6,35 +6,12 @@ use App\Models\Member\Member;
 use App\Models\System\SystemUnit;
 use App\Models\Wallet\Wallet;
 
-class MemberService implements UserCommonInterface
+class MemberService extends UserCommonInterface
 {
-    private $username;
-
-    private $password;
 
     private $nickname;
 
     private $mobile;
-
-    private $role_id;
-
-    public function setUsername($username)
-    {
-        $this->username = $username;
-        return $this;
-    }
-
-    public function setPassword($password)
-    {
-        $this->password = bcrypt($password);
-        return $this;
-    }
-
-    public function setRoleId($role_id)
-    {
-        $this->role_id = $role_id;
-        return $this;
-    }
 
     public function setNickname($nickname)
     {
@@ -57,7 +34,7 @@ class MemberService implements UserCommonInterface
 
         $baseUser = [
             'username' => $this->username,
-            'email' => "{$this->username}@platform.com",
+            'email' => $this->email ?? "{$this->username}@platform.com",
             'password' => $this->password,
         ];
 

@@ -2,15 +2,47 @@
 
 namespace App\Services\User;
 
-interface UserCommonInterface
+abstract class UserCommonInterface
 {
-    public function register();
+    protected $username;
 
-    public function login();
+    protected $password;
 
-    public function logout();
+    protected $email;
 
-    public function getUserInfo();
+    protected $role_id;
 
-    public function resetPassword();
+    public abstract function register();
+
+    public abstract function login();
+
+    public abstract function logout();
+
+    public abstract function getUserInfo();
+
+    public abstract function resetPassword();
+
+    public function setUsername($username)
+    {
+        $this->username = $username;
+        return $this;
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = bcrypt($password);
+        return $this;
+    }
+
+    public function setRoleId($role_id)
+    {
+        $this->role_id = $role_id;
+        return $this;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
 }
