@@ -53,7 +53,7 @@ class MemberService extends UserCommonInterface
         return $user->member()
             ->save(
                 $this->generateMember()
-            ) ? $user->admin : null;
+            ) ? $user->member : null;
     }
 
     public function login()

@@ -18,6 +18,7 @@ class TradeService
         $order->setTotalAmount($amount)
             ->setPayAmount($amount)
             ->setOrderType(Order::ORDER_TYPE_PAY)
+            ->setPayMethod(Order::PAY_METHOD_PLATFORM)
             ->setUnitID($unit_id)
             ->setPayAt(time())
             ->setPayStatus(Order::PAY_STATUS_PAI)
