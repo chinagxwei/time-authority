@@ -20,7 +20,7 @@ use Illuminate\Support\Carbon;
  * @property string sn
  * @property string third_party_payment_sn
  * @property string third_party_merchant_id
- * @property int order_category
+ * @property int order_type
  * @property string member_id
  * @property int pay_method
  * @property int unit_id
@@ -64,7 +64,7 @@ class Order extends SystemBaseModel
 
     protected $fillable = [
         'sn', 'third_party_payment_sn', 'third_party_merchant_id',
-        'member_id', 'order_category', 'unit_id', 'pay_method',
+        'member_id', 'order_type', 'unit_id', 'pay_method',
         'pay_at', 'pay_status', 'total_amount', 'reduce_amount',
         'pay_amount', 'commission_amount', 'real_income_amount',
         'cancel_at', 'sign', 'remarks', 'created_by', 'updated_by',
@@ -74,6 +74,26 @@ class Order extends SystemBaseModel
     protected $hidden = [
         'deleted_at', 'updated_at'
     ];
+
+    const ORDER_TYPE_PAY = 1;
+
+    const ORDER_TYPE_WITHDRAWAL = 2;
+
+    const ORDER_TYPE_COMMISSION = 3;
+
+    const PAY_METHOD_ALIPAY = 1;
+
+    const PAY_METHOD_WECHAT = 2;
+
+    const PAY_METHOD_VIRTUAL = 3;
+
+    const PAY_METHOD_PLATFORM = 10;
+
+    const PAY_STATUS_CANCEL = -1;
+
+    const PAY_STATUS_WAITING = 0;
+
+    const PAY_STATUS_PAI = 1;
 
     public function __construct()
     {
@@ -106,8 +126,8 @@ class Order extends SystemBaseModel
         if (isset($this->pay_status)) {
             $build = $build->where('pay_status', $this->pay_status);
         }
-        if (isset($this->order_category)) {
-            $build = $build->where('order_category', $this->order_category);
+        if (isset($this->order_type)) {
+            $build = $build->where('order_type', $this->order_type);
         }
         if (!empty($param['pay_at']) && (count($param['pay_at']) === 2)) {
             $build = $build->whereBetween('pay_at', [$param['pay_at'][0], $param['pay_at'][1]]);
@@ -128,7 +148,7 @@ class Order extends SystemBaseModel
         $raw = [
             $this->third_party_payment_sn ?? '',
             $this->third_party_merchant_id ?? '',
-            $this->order_category ?? '',
+            $this->order_type ?? '',
             $this->member_id ?? '',
             $this->pay_method ?? '',
             $this->unit_id ?? 0,

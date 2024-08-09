@@ -5,7 +5,7 @@ namespace App\Models\Trait\Build\Order;
 /**
  * @property string third_party_payment_sn
  * @property string third_party_merchant_id
- * @property int order_category
+ * @property int order_type
  * @property string member_id
  * @property int pay_method
  * @property int unit_id
@@ -32,27 +32,15 @@ trait OrderBuild
         return $this;
     }
 
-    public function setOrderCategory($order_category)
+    public function setOrderType($order_type)
     {
-        $this->order_category = $order_category;
-        return $this;
-    }
-
-    public function setMemberId($member_id)
-    {
-        $this->member_id = $member_id;
+        $this->order_type = $order_type;
         return $this;
     }
 
     public function setPayMethod($pay_method)
     {
         $this->pay_method = $pay_method;
-        return $this;
-    }
-
-    public function setUnitId($unit_id)
-    {
-        $this->unit_id = $unit_id;
         return $this;
     }
 

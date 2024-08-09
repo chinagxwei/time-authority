@@ -4,6 +4,7 @@ namespace App\Models\Wallet;
 
 use App\Models\Relation\CreatedRelation;
 use App\Models\Relation\OrderRelation;
+use App\Models\Relation\UnitRelation;
 use App\Models\Relation\UpdatedRelation;
 use App\Models\Relation\WalletRelation;
 use App\Models\SystemBaseModel;
@@ -19,6 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property string id
  * @property string wallet_id
+ * @property string unit_id
  * @property string order_sn
  * @property int amount
  * @property int surplus
@@ -32,7 +34,7 @@ class WalletLog extends SystemBaseModel
 {
     use HasFactory, SoftDeletes, Uuids, CreatedRelation,
         UpdatedRelation, OrderRelation, WalletRelation,
-        SearchTrait, SignTrait, WalletLogBuild;
+        SearchTrait, SignTrait, WalletLogBuild, UnitRelation;
 
     protected $table = 'wallet_logs';
 
@@ -52,7 +54,7 @@ class WalletLog extends SystemBaseModel
     protected $dateFormat = 'U';
 
     protected $fillable = [
-        'wallet_id', 'order_sn', 'amount', 'surplus', 'type', 'sign', 'created_by', 'updated_by'
+        'wallet_id', 'order_sn', 'unit_id', 'amount', 'surplus', 'type', 'sign', 'created_by', 'updated_by'
     ];
 
     protected $hidden = [
@@ -63,9 +65,9 @@ class WalletLog extends SystemBaseModel
         'created_at' => 'timestamp',
     ];
 
-    const FLOW_TYPE_OUTPUT = 1;
+    const FLOW_TYPE_INPUT = 1;
 
-    const FLOW_TYPE_INPUT = 2;
+    const FLOW_TYPE_OUTPUT = 2;
 
     /**
      * @param $wallet_id

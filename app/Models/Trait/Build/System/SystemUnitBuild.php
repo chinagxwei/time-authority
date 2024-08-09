@@ -7,6 +7,7 @@ namespace App\Models\Trait\Build\System;
  * @property int description
  * @property int label
  * @property int symbol
+ * @property int exchange_rate
  * @property int finance
  */
 trait SystemUnitBuild
@@ -33,6 +34,11 @@ trait SystemUnitBuild
 
     public function setFinance($finance){
         $this->finance = $finance;
+        return $this;
+    }
+
+    public function setExchangeRate($exchange_rate){
+        $this->exchange_rate = $exchange_rate;
         return $this;
     }
 }

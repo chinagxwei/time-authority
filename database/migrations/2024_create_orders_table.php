@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('sn',64)->index()->nullable();
             $table->string('third_party_payment_sn',64)->nullable()->comment('第三方支付ID');
             $table->string('third_party_merchant_id',18)->nullable()->comment('第三方支付商户号');
-            $table->tinyInteger('order_category')->unsigned()->default(0)->comment('订单类型 1VIP订单 2提款订单 3佣金订单');
+            $table->tinyInteger('order_type')->unsigned()->default(0)->comment('订单类型 1支付订单 2提款订单 3佣金订单');
             $table->uuid('wallet_id')->index()->nullable()->comment('钱包ID');
             $table->tinyInteger('pay_method')->unsigned()->default(0)->comment('支付方式 1支付宝 2微信 3虚拟账户 10平台');
             $table->integer('unit_id')->unsigned()->default(0)->comment('单位ID');

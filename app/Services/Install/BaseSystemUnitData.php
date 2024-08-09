@@ -11,10 +11,11 @@ class BaseSystemUnitData implements BaseData
         $time = time();
         return [
             [
-                'title' => 'RMB',
-                'description' => 'RMB',
-                'label' => 'RMB',
-                'symbol' => '￥',
+                'title' => '积分',
+                'description' => '积分',
+                'label' => '积分',
+                'exchange_rate' => 1,
+                'symbol' => '',
                 'finance' => 1,
                 'created_by' => $params[0],
                 'updated_by' => $params[0],
@@ -22,10 +23,11 @@ class BaseSystemUnitData implements BaseData
                 'updated_at' => $time
             ],
             [
-                'title' => '积分',
-                'description' => '积分',
-                'label' => '积分',
-                'symbol' => '',
+                'title' => 'RMB',
+                'description' => 'RMB',
+                'label' => 'RMB',
+                'symbol' => '￥',
+                'exchange_rate' => 100,
                 'finance' => 1,
                 'created_by' => $params[0],
                 'updated_by' => $params[0],

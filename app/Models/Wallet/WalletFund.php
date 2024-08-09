@@ -14,8 +14,11 @@ use App\Models\Trait\SearchTrait;
 use App\Models\Trait\SignTrait;
 use Carbon\Carbon;
 use Emadadly\LaravelUuid\Uuids;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @property string id
@@ -121,5 +124,26 @@ class WalletFund extends SystemBaseModel
         }
 
         return $build->with($with)->orderBy('id', 'desc');
+    }
+
+    /**
+     * @param $wallet_id
+     * @param $unit_id
+     * @param bool $checkFrozen
+     * @return Builder|Model|object|null
+     */
+    public static function findFundByUnit($wallet_id, $unit_id, $checkFrozen = true)
+    {
+        $query = self::query()
+            ->where('wallet_id', $wallet_id)
+            ->where('unit_id', $unit_id);
+        if ($checkFrozen) {
+            $query = $query->where('frozen', self::DISABLE);
+        }
+
+        return $query->first([
+            DB::raw('SUM(denomination) as cumulative_amount'),
+            DB::raw('SUM(balance) as total_balance')
+        ]);
     }
 }

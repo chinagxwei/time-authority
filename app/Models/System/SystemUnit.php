@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int description
  * @property int label
  * @property int symbol
+ * @property int exchange_rate
  * @property int finance
  * @property int created_by
  * @property Carbon created_at
@@ -42,7 +43,7 @@ class SystemUnit extends SystemBaseModel
 
 
     protected $fillable = [
-        'title', 'description', 'label', 'symbol', 'finance', 'created_by', 'updated_by'
+        'title', 'description', 'label', 'symbol', 'exchange_rate', 'finance', 'created_by', 'updated_by'
     ];
 
     protected $hidden = [
