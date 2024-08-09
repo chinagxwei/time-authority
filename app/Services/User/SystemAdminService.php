@@ -8,14 +8,6 @@ use App\Models\System\SystemRole;
 class SystemAdminService extends UserCommonInterface
 {
 
-    private $user_type;
-
-    public function setUserType($user_type)
-    {
-        $this->user_type = $user_type;
-        return $this;
-    }
-
     public function register()
     {
         // TODO: Implement register() method.
@@ -36,7 +28,7 @@ class SystemAdminService extends UserCommonInterface
 
         return $user->admin()
             ->save(
-                new SystemAdmin(['nickname' => 'admin', 'role_id' => 1])
+                new SystemAdmin(['nickname' => 'admin', 'role_id' => $this->role_id])
             ) ? $user->admin : null;
     }
 

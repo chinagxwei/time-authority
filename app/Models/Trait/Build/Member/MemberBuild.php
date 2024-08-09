@@ -4,6 +4,7 @@ namespace App\Models\Trait\Build\Member;
 
 /**
  * @property string wallet_id
+ * @property int role_id
  * @property string organization_id
  * @property int order_revenue_config_id
  * @property string nickname
@@ -19,17 +20,13 @@ namespace App\Models\Trait\Build\Member;
  */
 trait MemberBuild
 {
-    public function setWalletId($wallet_id){
-        $this->wallet_id = $wallet_id;
-        return $this;
-    }
 
-    public function setOrganizationId($organization_id){
+    public function setOrganizationID($organization_id){
         $this->organization_id = $organization_id;
         return $this;
     }
 
-    public function setOrderRevenueConfigId($order_revenue_config_id){
+    public function setOrderRevenueConfigID($order_revenue_config_id){
         $this->order_revenue_config_id = $order_revenue_config_id;
         return $this;
     }
@@ -81,6 +78,11 @@ trait MemberBuild
 
     public function setRegisterType($register_type){
         $this->register_type = $register_type;
+        return $this;
+    }
+
+    public function setRoleID($role_id){
+        $this->role_id = $role_id;
         return $this;
     }
 }

@@ -13,6 +13,8 @@ class MemberService extends UserCommonInterface
 
     private $mobile;
 
+    private $order_revenue_config_id;
+
     public function setNickname($nickname)
     {
         $this->nickname = $nickname;
@@ -22,6 +24,12 @@ class MemberService extends UserCommonInterface
     public function setMobile($mobile)
     {
         $this->mobile = $mobile;
+        return $this;
+    }
+
+    public function setOrderRevenueConfigId($order_revenue_config_id)
+    {
+        $this->order_revenue_config_id = $order_revenue_config_id;
         return $this;
     }
 
@@ -83,12 +91,13 @@ class MemberService extends UserCommonInterface
                         'sign' => md5("{$wallet->id}_0_0")
                     ]);
                 });
-
             return new Member([
                 'nickname' => $this->nickname ?? 'member_' . mt_rand(100000, 999999),
                 'role_id' => $this->role_id,
+                'order_revenue_config_id' => $this->order_revenue_config_id ?? 1,
                 'wallet_id' => $wallet->id,
-                'mobile' => $this->mobile ?? null
+                'mobile' => $this->mobile ?? null,
+                'promotion_sn' => md5('member_' . $wallet->id . '_' . mt_rand(100000, 999999))
             ]);
         }
 

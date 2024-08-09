@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('order_revenue_configs', function (Blueprint $table) {
             $table->increments('id')->unsigned();
+            $table->integer('unit_id')->unsigned()->default(0)->comment('单位ID');
             $table->string('title', 128)->comment('标题');
             $table->decimal('commission_ratio',10)->unsigned()->nullable()->comment('佣金比例');
             $table->integer('created_at')->unsigned()->nullable();

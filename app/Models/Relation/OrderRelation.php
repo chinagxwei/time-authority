@@ -10,7 +10,7 @@ use App\Models\Order\Order;
  */
 trait OrderRelation
 {
-    public function setOrderSn($order_sn)
+    public function setOrderSN($order_sn)
     {
         $this->order_sn = $order_sn;
         return $this;

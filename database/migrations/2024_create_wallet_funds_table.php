@@ -21,6 +21,7 @@ return new class extends Migration
             $table->bigInteger('balance')->unsigned()->nullable()->comment('余额（单位：分）');
             $table->integer('unit_id')->unsigned()->default(0)->comment('单位ID');
             $table->tinyInteger('frozen')->unsigned()->default(0)->nullable()->comment('充值冻结 0不是 1是');
+            $table->tinyInteger('gift')->unsigned()->default(0)->nullable()->comment('充值赠送 0不是 1是');
             $table->string('sign',64)->nullable()->comment('签名');
             $table->integer('created_at')->unsigned()->nullable();
             $table->integer('updated_at')->unsigned()->nullable();

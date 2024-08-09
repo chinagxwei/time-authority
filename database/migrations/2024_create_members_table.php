@@ -27,6 +27,9 @@ return new class extends Migration
             $table->uuid('parent_id')->index()->nullable()->comment('父会员ID');
             $table->tinyInteger('node_level')->unsigned()->default(0)->nullable()->comment('节点层级');
             $table->text('belong_agent_node')->nullable()->comment('属于代理节点');
+            $table->string('promotion_sn',32)->index()->nullable()->comment('推广序列号');
+            $table->string('promotion_qrcode',128)->index()->nullable()->comment('推广二维码');
+            $table->tinyInteger('develop')->unsigned()->default(0)->nullable()->comment('测试会员 0否 1是');
             $table->integer('created_at')->unsigned()->nullable();
             $table->integer('updated_at')->unsigned()->nullable();
             $table->integer('created_by')->index()->unsigned()->nullable()->comment('用户ID');
