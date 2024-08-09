@@ -17,6 +17,16 @@ trait OrderRelation
     }
 
     /**
+     * @param $order_sn
+     * @param $with
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     */
+    public static function findOneByOrderSN($order_sn, $with = [])
+    {
+        return self::query()->where('order_sn', $order_sn)->with($with)->first();
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function order()

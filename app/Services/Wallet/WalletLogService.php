@@ -85,12 +85,13 @@ class WalletLogService
 
     public static function generate($wallet_id, $order_sn, $unit_id, $amount, $surplus, $type)
     {
-        $log = (new WalletLog)->setWalletID($wallet_id)
+        $log = (new WalletLog())->setWalletID($wallet_id)
             ->setOrderSN($order_sn)
             ->setUnitID($unit_id)
             ->setAmount($amount)
             ->setSurplus($surplus)
-            ->setType($type);
+            ->setType($type)
+            ->setSign();
 
         return $log->save() ? $log : null;
     }

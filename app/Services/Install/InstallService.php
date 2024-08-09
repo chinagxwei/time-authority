@@ -2,15 +2,18 @@
 
 namespace App\Services\Install;
 
+use App\Models\Order\Order;
 use App\Models\Order\OrderRevenuesConfig;
 use App\Models\System\SystemAdmin;
 use App\Models\System\SystemNavigation;
 use App\Models\System\SystemRole;
 use App\Models\System\SystemRouter;
 use App\Models\System\SystemUnit;
+use App\Services\Order\TradeService;
 use App\Services\User\MemberService;
 use App\Services\User\SystemAdminService;
-use function Symfony\Component\Translation\t;
+use App\Services\Wallet\RechargeRefundService;
+use App\Services\Wallet\RechargeService;
 
 class InstallService
 {
@@ -90,9 +93,24 @@ class InstallService
 
     private function initMember()
     {
-        (new MemberService())->setUsername('test')
+        $member = (new MemberService())->setUsername('test')
             ->setPassword('test123456')
             ->setRoleId(3)
             ->register();
+
+        $order = TradeService::platformOrder(10);
+
+        (new RechargeService)->setAmount(10)
+            ->setOrder($order)
+            ->setWalletId($member->wallet_id)
+            ->execute();
+
+        $refundOrder = Order::findOneBySN($order->sn);
+
+        (new RechargeRefundService())->setOrder($refundOrder)
+            ->setWalletID($member->wallet_id)
+            ->execute();
+
+
     }
 }

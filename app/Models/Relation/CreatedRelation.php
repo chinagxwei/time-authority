@@ -16,6 +16,10 @@ trait CreatedRelation
      */
     public function setCreatedBy($user_id = null)
     {
+        if (auth('api')->guest()){
+            return $this;
+        }
+
         if (empty($user_id) && empty($this->created_by) && $user = auth('api')->user()) {
             $this->created_by = $user->id;
         } else {

@@ -6,15 +6,15 @@ use App\Models\Member\Member;
 use App\Models\Relation\CreatedRelation;
 use App\Models\Relation\UpdatedRelation;
 use App\Models\System\SystemUnit;
-use App\Models\SystemBaseModel;
+use App\Models\SystemBaseUuidModel;
 use App\Models\Trait\SearchTrait;
 use App\Models\Trait\SignTrait;
 use Carbon\Carbon;
-use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
+
 
 /**
  * @property string id
@@ -25,9 +25,9 @@ use Illuminate\Support\Facades\DB;
  * @property Member own
  * @property WalletUnitBalance unitBalance
  */
-class Wallet extends SystemBaseModel
+class Wallet extends SystemBaseUuidModel
 {
-    use HasFactory, SoftDeletes, Uuids, CreatedRelation, UpdatedRelation, SearchTrait, SignTrait;
+    use HasFactory, SoftDeletes, CreatedRelation, UpdatedRelation, SearchTrait, SignTrait;
 
     protected $table = 'wallets';
 
@@ -52,8 +52,9 @@ class Wallet extends SystemBaseModel
     ];
 
     protected $hidden = [
-        'deleted_at', 'updated_at'
+        'deleted_by', 'updated_by','deleted_at', 'updated_at'
     ];
+
 
     /**
      * @param $total_balance

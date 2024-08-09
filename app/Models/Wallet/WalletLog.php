@@ -8,6 +8,7 @@ use App\Models\Relation\UnitRelation;
 use App\Models\Relation\UpdatedRelation;
 use App\Models\Relation\WalletRelation;
 use App\Models\SystemBaseModel;
+use App\Models\SystemBaseUuidModel;
 use App\Models\Trait\Build\Wallet\WalletLogBuild;
 use App\Models\Trait\SearchTrait;
 use App\Models\Trait\SignTrait;
@@ -16,6 +17,7 @@ use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @property string id
@@ -30,9 +32,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int updated_by
  * @property Carbon created_at
  */
-class WalletLog extends SystemBaseModel
+class WalletLog extends SystemBaseUuidModel
 {
-    use HasFactory, SoftDeletes, Uuids, CreatedRelation,
+    use HasFactory, SoftDeletes, CreatedRelation,
         UpdatedRelation, OrderRelation, WalletRelation,
         SearchTrait, SignTrait, WalletLogBuild, UnitRelation;
 
@@ -69,59 +71,6 @@ class WalletLog extends SystemBaseModel
 
     const FLOW_TYPE_OUTPUT = 2;
 
-    /**
-     * @param $wallet_id
-     * @param $order_sn
-     * @param $amount
-     * @param $surplus
-     * @param $type
-     * @return static|null
-     * @throws \Exception
-     */
-    public static function generate($wallet_id, $order_sn, $amount, $surplus, $type)
-    {
-        $model = new static();
-        $model->wallet_id = $wallet_id;
-        $model->order_sn = $order_sn;
-        $model->type = $type;
-        $model->surplus = abs($surplus);
-        if ($type === self::FLOW_TYPE_OUTPUT) {
-            $model->amount = -(abs($amount));
-        } elseif ($type === self::FLOW_TYPE_INPUT) {
-            $model->amount = abs($amount);
-        } else {
-            throw new \Exception('钱包日志类型错误');
-        }
-        $model->setSign();
-        return $model->save() ? $model : null;
-    }
-
-    /**
-     * @param $wallet_id
-     * @param $order_sn
-     * @param $amount
-     * @param $surplus
-     * @return static|null
-     * @throws \Exception
-     */
-    public static function input($wallet_id, $order_sn, $amount, $surplus)
-    {
-        return self::generate($wallet_id, $order_sn, $amount, $surplus, self::FLOW_TYPE_INPUT);
-    }
-
-    /**
-     * @param $wallet_id
-     * @param $order_sn
-     * @param $amount
-     * @param $surplus
-     * @return static|null
-     * @throws \Exception
-     */
-    public static function output($wallet_id, $order_sn, $amount, $surplus)
-    {
-        return self::generate($wallet_id, $order_sn, $amount, $surplus, self::FLOW_TYPE_OUTPUT);
-    }
-
     function searchBuild($param = [], $with = [])
     {
         // TODO: Implement searchBuild() method.
@@ -147,6 +96,26 @@ class WalletLog extends SystemBaseModel
 
     }
 
+    public function toOutput($surplus)
+    {
+        // TODO: Implement toOuput() method.
+        return [
+            'wallet_id' => $this->wallet_id,
+            'order_sn' => $this->order_sn,
+            'unit_id' => $this->unit_id,
+            'amount' => $this->amount,
+            'surplus' => $surplus,
+            'sign' => sha1(join('_', [
+                $this->wallet_id ?? 0,
+                $this->order_sn ?? '',
+                $this->amount ?? 0,
+                $surplus ?? 0,
+                $this->type ?? 0,
+            ])),
+            'type' => WalletLog::FLOW_TYPE_OUTPUT
+        ];
+    }
+
     function setSign()
     {
         // TODO: Implement setSign() method.
@@ -159,5 +128,6 @@ class WalletLog extends SystemBaseModel
         ];
 
         $this->sign = sha1(join('_', $raw));
+        return $this;
     }
 }

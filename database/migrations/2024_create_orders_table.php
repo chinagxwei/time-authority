@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->uuid('id')->unique()->primary();
+            $table->uuid('id')->primary();
             $table->string('sn',64)->index()->nullable();
             $table->string('third_party_payment_sn',64)->nullable()->comment('第三方支付ID');
             $table->string('third_party_merchant_id',18)->nullable()->comment('第三方支付商户号');

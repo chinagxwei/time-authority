@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('wallet_logs', function (Blueprint $table) {
+            $table->uuid('id')->unique()->primary();
             $table->uuid('wallet_id')->index()->nullable()->comment('钱包ID');
             $table->string('order_sn',64)->index()->nullable()->comment('订单编号');
             $table->integer('unit_id')->unsigned()->default(0)->comment('单位ID');

@@ -10,7 +10,10 @@ use App\Models\SystemBaseModel;
 use App\Models\Trait\Build\Order\OrderBuild;
 use App\Models\Trait\SearchTrait;
 use App\Models\Trait\SignTrait;
-use Emadadly\LaravelUuid\Uuids;
+use App\Models\Wallet\WalletFund;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Ramsey\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
@@ -41,7 +44,7 @@ use Illuminate\Support\Carbon;
  */
 class Order extends SystemBaseModel
 {
-    use HasFactory, SoftDeletes, Uuids,
+    use HasFactory, SoftDeletes,
         OrderBuild, CreatedRelation, UpdatedRelation,
         MemberRelation, UnitRelation, SearchTrait, SignTrait;
 
@@ -98,15 +101,44 @@ class Order extends SystemBaseModel
     public function __construct()
     {
         static::creating(function ($model) {
+            if (empty($model->id)) {
+                $model->id = Uuid::uuid4()->toString();
+            }
             if (empty($model->sn)) {
                 $model->sn = date('YmdHis') . substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
             }
         });
     }
 
+    /**
+     * @param $order_sn
+     * @param array $with
+     * @param bool $lock
+     * @return Builder|Model|object|null|static
+     */
+    public static function findOneBySN($order_sn, $with = [], $lock = false)
+    {
+        return self::query()->where('sn', $order_sn)->with($with)->lock($lock)->first();
+    }
+
     public function revenue()
     {
         return $this->hasOne(OrderRevenues::class, 'from_order_sn', 'sn');
+    }
+
+    public function fund()
+    {
+        return $this->hasOne(WalletFund::class, 'order_sn', 'sn');
+    }
+
+    /**
+     * @return bool
+     */
+    public function cancel()
+    {
+        return $this->setCancelAt(time())
+            ->setPayStatus(Order::PAY_STATUS_CANCEL)
+            ->save();
     }
 
     function searchBuild($param = [], $with = [])

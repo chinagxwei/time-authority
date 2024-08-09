@@ -16,6 +16,9 @@ trait UpdatedRelation
      */
     public function setUpdatedBy($user_id = null)
     {
+        if (auth('api')->guest()){
+            return $this;
+        }
         if (empty($user_id) && empty($this->updated_by) && $user = auth('api')->user()) {
             $this->updated_by = $user->id;
         } else {

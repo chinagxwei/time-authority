@@ -10,24 +10,15 @@ use App\Models\Wallet\WalletLog;
 /**
  * 生成充值记录->生成订单记录流水
  */
-class RechargeService
+class RechargeService extends BaseOnOrder
 {
     private $amount;
-
-    /** @var Order */
-    private $order;
 
     private $wallet_id;
 
     public function setAmount($amount)
     {
         $this->amount = $amount;
-        return $this;
-    }
-
-    public function setOrder(Order $order)
-    {
-        $this->order = $order;
         return $this;
     }
 
@@ -39,6 +30,19 @@ class RechargeService
 
     public function execute()
     {
+
+        if (empty($this->order) ) {
+            throw new \Exception('订单不存在');
+        }
+
+        if (empty($this->wallet_id)) {
+            throw new \Exception('钱包ID错误');
+        }
+
+        if (!isset($this->amount)) {
+            throw new \Exception('充值金额未设置');
+        }
+
         if ($this->generateFund()) {
 
             $balance = WalletFund::findFundByUnit($this->wallet_id, $this->order->unit_id);
@@ -48,7 +52,7 @@ class RechargeService
             } else {
                 $balance_array = $balance->toArray();
 
-                $this->updateWallet($balance_array['cumulative_amount'],$balance_array['total_balance']);
+                $this->updateWallet($balance_array['cumulative_amount'], $balance_array['total_balance']);
 
                 $this->generateWalletLog($balance_array['total_balance']);
 
@@ -96,7 +100,8 @@ class RechargeService
      * @param $total_balance
      * @return void
      */
-    private function updateWallet($cumulative_amount,$total_balance){
+    private function updateWallet($cumulative_amount, $total_balance)
+    {
         // 更新钱包余额记录
         $wallet = Wallet::findOneByID($this->wallet_id, ['unitBalance']);
 

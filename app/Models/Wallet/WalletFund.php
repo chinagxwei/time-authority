@@ -8,12 +8,11 @@ use App\Models\Relation\OrderRelation;
 use App\Models\Relation\UnitRelation;
 use App\Models\Relation\UpdatedRelation;
 use App\Models\Relation\WalletRelation;
-use App\Models\SystemBaseModel;
+use App\Models\SystemBaseUuidModel;
 use App\Models\Trait\Build\Wallet\WalletFundBuild;
 use App\Models\Trait\SearchTrait;
 use App\Models\Trait\SignTrait;
 use Carbon\Carbon;
-use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -34,9 +33,9 @@ use Illuminate\Support\Facades\DB;
  * @property int updated_by
  * @property Carbon created_at
  */
-class WalletFund extends SystemBaseModel
+class WalletFund extends SystemBaseUuidModel
 {
-    use HasFactory, SoftDeletes, Uuids, CreatedRelation,
+    use HasFactory, SoftDeletes, CreatedRelation,
         UpdatedRelation, UnitRelation, OrderRelation,
         WalletRelation, SearchTrait, SignTrait, WalletFundBuild;
 
@@ -91,6 +90,14 @@ class WalletFund extends SystemBaseModel
         }
 
         return $query->sum('balance');
+    }
+
+    /**
+     * @param $order_sn
+     * @return Builder[]|\Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getFundByOrder($order_sn){
+        return self::query()->where('order_sn',$order_sn)->get();
     }
 
     function setSign()
