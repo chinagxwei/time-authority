@@ -4,6 +4,7 @@ namespace App\Services\Install;
 
 use App\Models\Order\Order;
 use App\Models\Order\OrderRevenuesConfig;
+use App\Models\Product\ProductVIP;
 use App\Models\System\SystemAdmin;
 use App\Models\System\SystemNavigation;
 use App\Models\System\SystemRole;
@@ -14,6 +15,7 @@ use App\Services\User\MemberService;
 use App\Services\User\SystemAdminService;
 use App\Services\Wallet\RechargeRefundService;
 use App\Services\Wallet\RechargeService;
+use App\Services\Wallet\VipService;
 
 class InstallService
 {
@@ -33,6 +35,7 @@ class InstallService
             $this->initRole();
             $this->initUnit();
             $this->initCommissionRatio();
+            $this->initVip();
             $this->initMember();
         } else {
             throw new \Exception('create admin error');
@@ -91,6 +94,12 @@ class InstallService
         OrderRevenuesConfig::query()->insert($data);
     }
 
+    private function initVip(){
+        $data = (new BaseSystemVipData)->getData([$this->admin->created_by]);
+
+        ProductVIP::query()->insert($data);
+    }
+
     private function initMember()
     {
         $member = (new MemberService())->setUsername('test')
@@ -111,6 +120,11 @@ class InstallService
             ->setWalletID($member->wallet_id)
             ->execute();
 
+        $order2 = TradeService::platformOrder(10);
 
+        (new VipService())->setOrder($order2)
+            ->setVipId(1)
+            ->setMemberId($member->id)
+            ->execute();
     }
 }

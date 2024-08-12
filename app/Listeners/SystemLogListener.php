@@ -29,11 +29,19 @@ class SystemLogListener
     {
         /** @var User $user */
         $user = auth('api')->user();
+
         list($name, $description) = $event->getLog();
+
         $ip = "0.0.0.0";
+
         if ($request = request()) {
             $ip = $request->ip();
         }
-        (new SystemLog())->generate($user->id, $name, "用户 - [ {$user->username} ] | $description", $ip);
+
+        (new SystemLog())->setCreatedBy($user->id)
+        ->setActionName($name)
+        ->setActionDescription("用户 - [ {$user->username} ] | $description")
+        ->setIP($ip)
+        ->save();
     }
 }

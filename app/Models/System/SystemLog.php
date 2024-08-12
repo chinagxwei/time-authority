@@ -64,19 +64,4 @@ class SystemLog extends Model
         return $build->with($with);
     }
 
-    /**
-     * @param $user_id
-     * @param $action_name
-     * @param $action_description
-     * @param $ip
-     * @return bool
-     */
-    public function generate($user_id, $action_name, $action_description, $ip)
-    {
-        return $this->setCreatedBy($user_id)
-            ->setActionName($action_name)
-            ->setActionDescription($action_description)
-            ->setIP($ip)
-            ->save();
-    }
 }

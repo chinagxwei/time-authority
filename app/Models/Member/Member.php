@@ -40,6 +40,7 @@ use Illuminate\Support\Collection;
  * @property OrderRevenuesConfig orderRevenuesConfig
  * @property Wallet wallet
  * @property Member parent
+ * @property MemberVIP vipInfo
  */
 class Member extends SystemBaseModel
 {
@@ -95,6 +96,14 @@ class Member extends SystemBaseModel
     public function parent()
     {
         return $this->hasOne(Member::class, "id", "parent_id");
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function vipInfo()
+    {
+        return $this->hasOne(MemberVIP::class, "member_id", "id");
     }
 
     /**

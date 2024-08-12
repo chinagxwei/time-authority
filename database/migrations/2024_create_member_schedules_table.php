@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->integer('created_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('updated_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('deleted_at')->unsigned()->nullable();
-            $table->primary(['from_member_id', 'to_member_id', 'schedule_id']);
+            $table->unique(['from_member_id', 'schedule_id']);
             $table->comment('会员日程安排表');
         });
     }

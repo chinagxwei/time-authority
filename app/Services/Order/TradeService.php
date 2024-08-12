@@ -7,7 +7,7 @@ use App\Models\System\SystemUnit;
 
 class TradeService
 {
-    public static function platformOrder($amount, $unit_id = 1)
+    public static function platformOrder($amount, $order_type = Order::ORDER_TYPE_PAY, $unit_id = 1)
     {
         $order = new Order();
 
@@ -17,7 +17,7 @@ class TradeService
 
         $order->setTotalAmount($amount)
             ->setPayAmount($amount)
-            ->setOrderType(Order::ORDER_TYPE_PAY)
+            ->setOrderType($order_type)
             ->setPayMethod(Order::PAY_METHOD_PLATFORM)
             ->setUnitID($unit_id)
             ->setPayAt(time())

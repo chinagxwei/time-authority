@@ -28,12 +28,16 @@ class RechargeRefundService extends BaseOnOrder
 
         $this->order->cancel();
 
-
         $funds = WalletFund::getFundByOrder($this->order->sn);
 
         $funds->each(function ($fund) {
             $fund->delete();
         });
+
+        // 如果涉及第三方支付，还要进行第三方支付退款
+        if ($this->order->pay_method == Order::PAY_METHOD_WECHAT || $this->order->pay_method == Order::PAY_METHOD_ALIPAY){
+
+        }
 
         $surplus = $this->updateWallet();
 
