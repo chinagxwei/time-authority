@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('schedules_topics', function (Blueprint $table) {
             $table->uuid('schedule_id');
-            $table->uuid('tag_id');
-            $table->primary(['schedule_id', 'tag_id']);
+            $table->uuid('topic_id');
+            $table->primary(['schedule_id', 'topic_id']);
             $table->comment('日程话题表');
         });
     }

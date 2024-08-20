@@ -4,6 +4,8 @@ namespace App\Models\Schedule;
 
 use App\Models\Relation\CreatedRelation;
 use App\Models\Relation\UpdatedRelation;
+use App\Models\System\SystemTag;
+use App\Models\System\SystemTopic;
 use App\Models\SystemBaseModel;
 use App\Models\Trait\Build\Schedule\ScheduleBuild;
 use App\Models\Trait\SearchTrait;
@@ -64,6 +66,26 @@ class Schedule extends SystemBaseModel
     protected $hidden = [
         'deleted_at', 'updated_at'
     ];
+
+    public function tags()
+    {
+        // TODO: Implement search() method.
+        return $this->belongsToMany(
+            SystemTag::class,
+            'schedules_tags',
+            'schedule_id',
+            'tag_id'
+        );
+    }
+
+    public function topics(){
+        return $this->belongsToMany(
+            SystemTopic::class,
+            'schedules_topics',
+            'schedule_id',
+            'topic_id'
+        );
+    }
 
     function searchBuild($param = [], $with = [])
     {
