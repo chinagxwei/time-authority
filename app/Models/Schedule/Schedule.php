@@ -17,7 +17,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property string id
  * @property string title
- * @property int year
+ * @property int started_year
+ * @property int ended_year
  * @property int started_weeks
  * @property int ended_weeks
  * @property int started_at
@@ -57,7 +58,8 @@ class Schedule extends SystemBaseModel
     protected $dateFormat = 'U';
 
     protected $fillable = [
-        'title', 'year', 'started_weeks', 'ended_weeks',
+        'title', 'started_year','ended_year',
+        'started_weeks', 'ended_weeks',
         'started_at', 'ended_at', 'location', 'remark',
         'loop', 'tips', 'openness', 'gmt', 'latitude',
         'longitude', 'created_by', 'updated_by'
@@ -96,10 +98,10 @@ class Schedule extends SystemBaseModel
             $build = $build->where('title', 'like', "%{$this->title}%");
         }
 
-        if (!empty($this->year)) {
-            $build = $build->where('year', $this->year);
-        }
-
+//        if (!empty($this->year)) {
+//            $build = $build->where('year', $this->year);
+//        }
+//
 //        if (!empty($this->started_weeks)) {
 //            $build = $build->where('started_weeks', $this->started_weeks);
 //        }

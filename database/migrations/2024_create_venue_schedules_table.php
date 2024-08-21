@@ -13,15 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('location_area', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
-            $table->string('title', 128)->index()->nullable()->comment('标题');
+        Schema::create('venue_schedules', function (Blueprint $table) {
+            $table->uuid('venue_id')->index()->nullable()->comment('场地ID');
+            $table->uuid('schedule_id')->index()->nullable()->comment('日程安排ID');
+            $table->bigInteger('price')->unsigned()->nullable()->comment('价格（单位：分）');
+            $table->integer('unit_id')->unsigned()->comment('单位ID');
+            $table->string('order_sn',64)->index()->nullable()->comment('订单编号');
             $table->integer('created_at')->unsigned()->nullable();
             $table->integer('updated_at')->unsigned()->nullable();
             $table->integer('created_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('updated_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('deleted_at')->unsigned()->nullable();
-            $table->comment('区域表');
+            $table->primary(['venue_id', 'schedule_id']);
+            $table->comment('场地日程安排表');
         });
     }
 
@@ -32,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('location_area');
+        Schema::dropIfExists('venue_schedules');
     }
 };

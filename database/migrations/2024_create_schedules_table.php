@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->uuid('id')->unique()->primary();
             $table->string('title', 128)->index()->nullable()->comment('标题');
-            $table->integer('year')->unsigned()->nullable()->comment('年份');
+            $table->integer('started_year')->unsigned()->nullable()->comment('开始年份');
+            $table->integer('ended_year')->unsigned()->nullable()->comment('结束年份');
             $table->tinyInteger('started_weeks')->unsigned()->nullable()->comment('开始周数');
             $table->tinyInteger('ended_weeks')->unsigned()->nullable()->comment('结束周数');
             $table->integer('started_at')->unsigned()->nullable()->comment('开始时间');

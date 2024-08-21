@@ -4,7 +4,8 @@ namespace App\Models\Trait\Build\Schedule;
 
 /**
  * @property string title
- * @property int year
+ * @property int started_year
+ * @property int ended_year
  * @property int started_weeks
  * @property int ended_weeks
  * @property int started_at
@@ -27,9 +28,15 @@ trait ScheduleBuild
         return $this;
     }
 
-    public function setYear($year)
+    public function setStartedYear($started_year)
     {
-        $this->year = $year;
+        $this->started_year = $started_year;
+        return $this;
+    }
+
+    public function setEndedYear($ended_year)
+    {
+        $this->ended_year = $ended_year;
         return $this;
     }
 
