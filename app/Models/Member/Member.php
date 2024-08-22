@@ -7,6 +7,8 @@ use App\Models\Order\OrderRevenuesConfig;
 use App\Models\Relation\CreatedRelation;
 use App\Models\Relation\UpdatedRelation;
 use App\Models\Relation\WalletRelation;
+use App\Models\Schedule\Schedule;
+use App\Models\System\SystemTag;
 use App\Models\SystemBaseModel;
 use App\Models\Trait\Build\Member\MemberBuild;
 use App\Models\Trait\SearchTrait;
@@ -21,7 +23,6 @@ use Illuminate\Support\Collection;
 /**
  * @property string id
  * @property string wallet_id
- * @property int role_id
  * @property string organization_id
  * @property int order_revenue_config_id
  * @property string nickname
@@ -65,7 +66,7 @@ class Member extends SystemBaseModel
 
     protected $fillable = [
         'wallet_id', 'order_revenue_config_id', 'organization_id',
-        'role_id', 'nickname', 'avatar', 'mobile', 'remark', 'develop',
+        'nickname', 'avatar', 'mobile', 'remark', 'develop',
         'promotion_sn', 'parent_id', 'belong_agent_node',
         'register_type', 'created_by', 'updated_by'
     ];
@@ -73,6 +74,31 @@ class Member extends SystemBaseModel
     protected $hidden = [
         'deleted_at', 'updated_at'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function schedules()
+    {
+        // TODO: Implement search() method.
+        return $this->belongsToMany(
+            Schedule::class,
+            'member_schedules',
+            'from_member_id',
+            'schedule_id'
+        );
+    }
+
+    public function tags()
+    {
+        // TODO: Implement search() method.
+        return $this->belongsToMany(
+            SystemTag::class,
+            'member_tags',
+            'member_id',
+            'tag_id'
+        );
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

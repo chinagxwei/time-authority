@@ -14,8 +14,8 @@ return new class extends Migration {
     {
         Schema::create('area_coordinates', function (Blueprint $table) {
             $table->integer('area_id')->index()->nullable()->comment('区域ID');
-            $table->integer('coordinates_id')->index()->nullable()->comment('坐标ID');
-            $table->primary(['area_id', 'coordinates_id']);
+            $table->integer('coordinate_id')->index()->nullable()->comment('坐标ID');
+            $table->primary(['area_id', 'coordinate_id']);
             $table->comment('区域坐标关联表');
         });
     }

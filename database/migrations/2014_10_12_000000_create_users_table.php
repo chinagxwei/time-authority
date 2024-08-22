@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id')->unsigned();
+            $table->integer('role_id')->index()->nullable()->comment('角色ID');
             $table->string('username',128)->comment('用户名');
             $table->string('email',128)->comment('邮箱')->unique();
             $table->timestamp('email_verified_at')->comment('邮箱验证时间')->nullable();

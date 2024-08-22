@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('wechat_miniprogram_accounts', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
+        Schema::create('wechat_mini_program_accounts', function (Blueprint $table) {
+            $table->increments('id')->unsigned()->startingValue(1000000);
             $table->uuid('member_id')->index()->nullable()->comment('会员ID');
             $table->string('session_key',128)->index()->nullable()->comment('session key');
             $table->string('openid',128)->index()->nullable()->comment('OPENID');
@@ -41,6 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wechat_miniprogram_accounts');
+        Schema::dropIfExists('wechat_mini_program_accounts');
     }
 };

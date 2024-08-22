@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Member\Member;
 use App\Models\System\SystemAdmin;
+use App\Models\System\SystemRole;
 use App\Models\Trait\SearchTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,6 +16,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * @property int id
+ * @property int role_id
  * @property string username
  * @property string email
  * @property string email_verified_at
@@ -25,6 +27,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property Carbon updated_at
  * @property SystemAdmin admin
  * @property Member member
+ * @property SystemRole role
  */
 class User extends Authenticatable implements JWTSubject
 {
@@ -88,6 +91,14 @@ class User extends Authenticatable implements JWTSubject
     public function member()
     {
         return $this->hasOne(Member::class, 'created_by', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function role()
+    {
+        return $this->hasOne(SystemRole::class, 'id', 'role_id');
     }
 
     /**

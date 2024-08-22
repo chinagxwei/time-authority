@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('wechat_office_accounts', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
+            $table->increments('id')->unsigned()->startingValue(1000000);
             $table->uuid('member_id')->index()->nullable()->comment('会员ID');
             $table->string('session_key',128)->index()->nullable()->comment('session key');
             $table->string('openid',128)->index()->nullable()->comment('OPENID');

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->uuid('id')->unique()->primary();
             $table->uuid('organization_id')->index()->nullable()->comment('组织ID');
             $table->uuid('wallet_id')->index()->nullable()->comment('钱包ID');
-            $table->integer('role_id')->index()->nullable()->comment('角色ID');
             $table->integer('order_revenue_config_id')->unsigned()->nullable()->comment('订单收益配置ID');
             $table->string('nickname',128)->nullable()->comment('昵称');
             $table->string('avatar',128)->nullable()->comment('头像');

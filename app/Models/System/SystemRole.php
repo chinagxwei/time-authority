@@ -63,7 +63,16 @@ class SystemRole extends SystemBaseModel
      */
     public function isSuperAdmin()
     {
-        return self::USER_TYPE_PLATFORM_SUPER_ADMIN === $this->user_type;
+        return self::USER_TYPE_PLATFORM_SUPER_ADMIN === $this->role_type;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isManager()
+    {
+        return self::USER_TYPE_PLATFORM_MANAGER === $this->role_type ||
+            self::USER_TYPE_PLATFORM_SUPER_ADMIN === $this->role_type;
     }
 
     /**

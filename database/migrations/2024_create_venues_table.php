@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('venues', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
+            $table->uuid('id')->primary();
             $table->string('title', 128)->index()->nullable()->comment('标题');
             $table->string('address', 192)->index()->nullable()->comment('地址');
             $table->decimal('latitude',10,8)->nullable()->comment('经度');

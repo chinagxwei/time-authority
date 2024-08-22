@@ -15,14 +15,12 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property string id
- * @property int role_id
  * @property string nickname
  * @property string mobile
  * @property string remark
  * @property int created_by
  * @property Carbon created_at
  * @property User user
- * @property SystemRole role
  */
 class SystemAdmin extends SystemBaseModel
 {
@@ -54,13 +52,6 @@ class SystemAdmin extends SystemBaseModel
      */
     protected $dateFormat = 'U';
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function role()
-    {
-        return $this->hasOne(SystemRole::class, 'id', 'role_id');
-    }
 
     function searchBuild($param = [], $with = [])
     {
