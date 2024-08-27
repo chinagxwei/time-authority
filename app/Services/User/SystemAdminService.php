@@ -7,6 +7,13 @@ use App\Models\System\SystemRole;
 
 class SystemAdminService extends UserCommonInterface
 {
+    private $remark;
+
+    public function setRemark($remark)
+    {
+        $this->remark = $remark;
+        return $this;
+    }
 
     public function register()
     {
@@ -28,8 +35,12 @@ class SystemAdminService extends UserCommonInterface
 
         return $user->admin()
             ->save(
-                new SystemAdmin(['nickname' => 'admin', 'role_id' => $this->role_id])
-            ) ? $user->admin : null;
+                new SystemAdmin([
+                    'nickname' => 'admin_' . mt_rand(100000, 999999),
+                    'remark' => $this->remark,
+                    'role_id' => $this->role_id
+                ])
+            ) ? $user : null;
     }
 
     public function login()
