@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\System;
+namespace App\Models\Classify;
 
 
 use App\Models\Relation\CreatedRelation;
@@ -17,11 +17,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int created_by
  * @property Carbon created_at
  */
-class SystemTag extends Model
+class Tag extends Model
 {
     use HasFactory, SoftDeletes, CreatedRelation, UpdatedRelation, SearchTrait;
 
-    protected $table = 'system_tags';
+    protected $table = 'tags';
     /**
      * 指定是否模型应该被戳记时间。
      *

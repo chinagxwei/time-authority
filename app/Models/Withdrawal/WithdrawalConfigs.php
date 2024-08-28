@@ -1,27 +1,37 @@
 <?php
 
-namespace App\Models\System;
-
+namespace App\Models\Withdrawal;
 
 use App\Models\Relation\CreatedRelation;
-use App\Models\Relation\UpdatedRelation;
+use App\Models\SystemBaseUuidModel;
 use App\Models\Trait\SearchTrait;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
- * @property int id
- * @property int title
+ * @property int $id
+ * @property string unit_id
+ * @property string title
+ * @property string commission_ratio
  * @property int created_by
+ * @property int updated_by
  * @property Carbon created_at
  */
-class SystemTopic extends Model
+class WithdrawalConfigs extends SystemBaseUuidModel
 {
-    use HasFactory, SoftDeletes, CreatedRelation, UpdatedRelation, SearchTrait;
+    use HasFactory, SoftDeletes, CreatedRelation, SearchTrait;
 
-    protected $table = 'system_topics';
+    protected $table = 'withdrawal_configs';
+
+    protected $fillable = [
+        'unit_id', 'title', 'commission_ratio'
+    ];
+
+    protected $hidden = [
+        'deleted_by', 'updated_by','deleted_at', 'updated_at'
+    ];
+
     /**
      * 指定是否模型应该被戳记时间。
      *
@@ -36,20 +46,15 @@ class SystemTopic extends Model
      */
     protected $dateFormat = 'U';
 
-
-    protected $fillable = [
-        'title', 'created_by', 'updated_by'
-    ];
-
-    protected $hidden = [
-        'deleted_at', 'updated_at'
-    ];
-
     function searchBuild($param = [], $with = [])
     {
         // TODO: Implement searchBuild() method.
         $this->fill($param);
         $build = $this;
+
+        if (!empty($this->unit_id)) {
+            $build = $build->where('unit_id', $this->unit_id);
+        }
 
         if (!empty($this->title)) {
             $build = $build->where('title', 'like', "%{$this->title}%");

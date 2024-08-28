@@ -3,12 +3,12 @@
 namespace App\Models\Member;
 
 
+use App\Models\Classify\Tag;
 use App\Models\Order\OrderRevenuesConfig;
 use App\Models\Relation\CreatedRelation;
 use App\Models\Relation\UpdatedRelation;
 use App\Models\Relation\WalletRelation;
 use App\Models\Schedule\Schedule;
-use App\Models\System\SystemTag;
 use App\Models\SystemBaseModel;
 use App\Models\Trait\Build\Member\MemberBuild;
 use App\Models\Trait\SearchTrait;
@@ -18,7 +18,6 @@ use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Collection;
 
 /**
  * @property string id
@@ -93,7 +92,7 @@ class Member extends SystemBaseModel
     {
         // TODO: Implement search() method.
         return $this->belongsToMany(
-            SystemTag::class,
+            Tag::class,
             'member_tags',
             'member_id',
             'tag_id'

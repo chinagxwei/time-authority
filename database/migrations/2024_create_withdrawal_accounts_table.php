@@ -13,24 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('wallet_withdrawals', function (Blueprint $table) {
+        Schema::create('withdrawal_accounts', function (Blueprint $table) {
             $table->uuid('id')->unique()->primary();
             $table->uuid('wallet_id')->index()->nullable()->comment('钱包ID');
-            $table->uuid('withdraw_account_id')->index()->nullable()->comment('提现账户ID');
-            $table->uuid('withdrawal_amount_config_id')->index()->nullable()->comment('提现配置ID');
-            $table->string('order_sn',64)->index()->nullable()->comment('订单编号');
-            $table->string('third_party_payment_sn',64)->nullable()->comment('第三方支付ID');
-            $table->string('third_party_merchant_id',18)->nullable()->comment('第三方支付商户号');
-            $table->bigInteger('amount')->unsigned()->nullable()->comment('金额（单位：分）');
-            $table->tinyInteger('status')->unsigned()->default(2)->nullable()->comment('状态 0审核失败 1审核成功 2待审核');
-            $table->string('remark',128)->nullable()->comment('备注');
+            $table->tinyInteger('account_type')->unsigned()->default(1)->nullable()->comment('账户类型 1支付宝 2银行卡');
+            $table->string('contact',64)->nullable()->comment('联系人');
+            $table->string('mobile',18)->index()->nullable()->comment('联系电话');
+            $table->string('account',128)->nullable()->comment('账户');
+            $table->string('bank_name',128)->nullable()->comment('银行名称');
             $table->string('sign',64)->nullable()->comment('签名');
             $table->integer('created_at')->unsigned()->nullable();
             $table->integer('updated_at')->unsigned()->nullable();
             $table->integer('created_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('updated_by')->index()->unsigned()->nullable()->comment('用户ID');
             $table->integer('deleted_at')->unsigned()->nullable();
-            $table->comment('钱包提款申请表');
+            $table->comment('提现账户表');
         });
     }
 
@@ -41,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wallet_withdrawals');
+        Schema::dropIfExists('withdrawal_accounts');
     }
 };

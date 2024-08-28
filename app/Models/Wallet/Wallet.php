@@ -62,7 +62,6 @@ class Wallet extends SystemBaseUuidModel
      */
     public function setTotalBalance($total_balance)
     {
-        $this->total_balance = $total_balance;
         $this->setSign();
         return $this;
     }
@@ -103,7 +102,7 @@ class Wallet extends SystemBaseUuidModel
         $this->fill($param);
         $build = $this;
 
-        return $build->with($with)->orderBy('created_by', 'desc');
+        return $build->with($with);
     }
 
     /**

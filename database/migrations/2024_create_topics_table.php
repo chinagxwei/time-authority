@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('system_tags', function (Blueprint $table) {
+        Schema::create('topics', function (Blueprint $table) {
             $table->uuid('id');
             $table->string('title', 64)->nullable()->comment('标题');
             $table->integer('created_at')->unsigned()->nullable();
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('system_tags');
+        Schema::dropIfExists('topics');
     }
 };

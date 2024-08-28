@@ -2,10 +2,10 @@
 
 namespace App\Models\Schedule;
 
+use App\Models\Classify\Tag;
+use App\Models\Classify\Topic;
 use App\Models\Relation\CreatedRelation;
 use App\Models\Relation\UpdatedRelation;
-use App\Models\System\SystemTag;
-use App\Models\System\SystemTopic;
 use App\Models\SystemBaseModel;
 use App\Models\Trait\Build\Schedule\ScheduleBuild;
 use App\Models\Trait\SearchTrait;
@@ -73,7 +73,7 @@ class Schedule extends SystemBaseModel
     {
         // TODO: Implement search() method.
         return $this->belongsToMany(
-            SystemTag::class,
+            Tag::class,
             'schedules_tags',
             'schedule_id',
             'tag_id'
@@ -82,7 +82,7 @@ class Schedule extends SystemBaseModel
 
     public function topics(){
         return $this->belongsToMany(
-            SystemTopic::class,
+            Topic::class,
             'schedules_topics',
             'schedule_id',
             'topic_id'

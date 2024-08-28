@@ -130,7 +130,7 @@ class WalletFund extends SystemBaseUuidModel
             $build = $build->where('order_sn', 'like', "%{$this->order_sn}%");
         }
 
-        return $build->with($with)->orderBy('id', 'desc');
+        return $build->with($with);
     }
 
     /**
