@@ -32,7 +32,7 @@ class SystemAuthenticate extends Middleware
         /** @var User $user */
         if ($user = auth('api')->user()) {
 
-            if ($user->isSuperManager()) {
+            if ($user->role->isSuperAdmin()) {
                 return $next($request);
             } else {
 
