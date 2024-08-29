@@ -84,6 +84,8 @@ class Order extends SystemBaseModel
 
     const ORDER_TYPE_COMMISSION = 3;
 
+    const ORDER_TYPE_REVENUE = 4;
+
     const PAY_METHOD_ALIPAY = 1;
 
     const PAY_METHOD_WECHAT = 2;

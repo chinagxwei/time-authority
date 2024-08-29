@@ -4,7 +4,9 @@ namespace App\Models\Schedule;
 
 use App\Models\Classify\Tag;
 use App\Models\Classify\Topic;
+use App\Models\Quest\Quest;
 use App\Models\Relation\CreatedRelation;
+use App\Models\Relation\MemberRelation;
 use App\Models\Relation\UpdatedRelation;
 use App\Models\SystemBaseModel;
 use App\Models\Trait\Build\Schedule\ScheduleBuild;
@@ -16,6 +18,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string id
+ * @property string member_id
+ * @property string quest_id
  * @property string title
  * @property int started_year
  * @property int ended_year
@@ -34,11 +38,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int created_by
  * @property int updated_by
  * @property Carbon created_at
+ * @property Quest quest
  */
 class Schedule extends SystemBaseModel
 {
     use HasFactory, SoftDeletes, Uuids, SearchTrait,
-        CreatedRelation, UpdatedRelation, ScheduleBuild;
+        CreatedRelation, UpdatedRelation, ScheduleBuild,
+        MemberRelation;
 
     protected $table = 'schedules';
 
@@ -58,8 +64,8 @@ class Schedule extends SystemBaseModel
     protected $dateFormat = 'U';
 
     protected $fillable = [
-        'title', 'started_year','ended_year',
-        'started_weeks', 'ended_weeks',
+        'member_id', 'quest_id', 'title', 'started_year',
+        'ended_year', 'started_weeks', 'ended_weeks',
         'started_at', 'ended_at', 'location', 'remark',
         'loop', 'tips', 'openness', 'gmt', 'latitude',
         'longitude', 'created_by', 'updated_by'
@@ -80,13 +86,19 @@ class Schedule extends SystemBaseModel
         );
     }
 
-    public function topics(){
+    public function topics()
+    {
         return $this->belongsToMany(
             Topic::class,
             'schedules_topics',
             'schedule_id',
             'topic_id'
         );
+    }
+
+    public function quest()
+    {
+        return $this->hasOne(Quest::class, 'id', 'quest_id');
     }
 
     function searchBuild($param = [], $with = [])

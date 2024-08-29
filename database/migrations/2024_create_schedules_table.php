@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->uuid('id')->unique()->primary();
+            $table->uuid('member_id')->index()->nullable()->comment('会员ID');
+            $table->uuid('quest_id')->index()->nullable()->comment('任务ID');
             $table->string('title', 128)->index()->nullable()->comment('标题');
             $table->integer('started_year')->unsigned()->nullable()->comment('开始年份');
             $table->integer('ended_year')->unsigned()->nullable()->comment('结束年份');
