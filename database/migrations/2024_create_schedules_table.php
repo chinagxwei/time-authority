@@ -28,7 +28,7 @@ return new class extends Migration
             $table->text('remark')->nullable()->comment('备注');
             $table->tinyInteger('loop')->unsigned()->nullable()->comment('重复 0不重复 1每日 2每周 3每月');
             $table->tinyInteger('tips')->unsigned()->nullable()->comment('提醒 0不提醒 1提醒');
-            $table->tinyInteger('openness')->unsigned()->nullable()->comment('开放度 0公开 3私域一对多 7专属一对一 15机构');
+
             $table->tinyInteger('gmt')->nullable()->comment('时区值');
             $table->decimal('latitude',10,8)->nullable()->comment('经度');
             $table->decimal('longitude',11,8)->nullable()->comment('纬度');
