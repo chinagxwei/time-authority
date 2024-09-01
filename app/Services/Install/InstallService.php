@@ -35,7 +35,6 @@ class InstallService
             $this->initRole();
             $this->initUnit();
             $this->initCommissionRatio();
-            $this->initVip();
             $this->initMember();
         } else {
             throw new \Exception('create admin error');
@@ -94,10 +93,11 @@ class InstallService
         OrderRevenuesConfig::query()->insert($data);
     }
 
-    private function initVip(){
+    private function initVip()
+    {
         $data = (new BaseSystemVipData)->getData([$this->admin->created_by]);
-
-        ProductVIP::query()->insert($data);
+        $vip = (new ProductVIP)->fill($data);
+        return $vip->save() ? ProductVIP::lastOne() : null;
     }
 
     private function initMember()
@@ -122,8 +122,10 @@ class InstallService
 
         $order2 = TradeService::platformOrder(10);
 
+        $vip = $this->initVip();
+
         (new VipService())->setOrder($order2)
-            ->setVipId(1)
+            ->setVipId($vip->id)
             ->setMemberId($member->id)
             ->execute();
     }

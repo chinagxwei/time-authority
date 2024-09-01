@@ -128,7 +128,9 @@ class Member extends SystemBaseModel
      */
     public function vipInfo()
     {
-        return $this->hasOne(MemberVIP::class, "member_id", "id");
+        return $this->hasOne(MemberVIP::class, "member_id", "id")
+            ->where('started_at', '<=', time())
+            ->where('ended_at', '>=', time());
     }
 
     /**

@@ -44,6 +44,7 @@ class MemberService extends UserCommonInterface
             'username' => $this->username,
             'email' => $this->email ?? "{$this->username}@platform.com",
             'password' => $this->password,
+            'role_id' => $this->role_id,
         ];
 
         $user = new \App\Models\User();
@@ -93,7 +94,6 @@ class MemberService extends UserCommonInterface
                 });
             return new Member([
                 'nickname' => $this->nickname ?? 'member_' . mt_rand(100000, 999999),
-                'role_id' => $this->role_id,
                 'order_revenue_config_id' => $this->order_revenue_config_id ?? 1,
                 'wallet_id' => $wallet->id,
                 'mobile' => $this->mobile ?? null,

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('member_vips', function (Blueprint $table) {
             $table->uuid('member_id')->index()->nullable()->comment('会员ID');
-            $table->integer('vip_id')->index()->nullable()->comment('VIP编号');
+            $table->uuid('vip_id')->index()->nullable()->comment('VIP编号');
             $table->string('order_sn', 64)->index()->nullable()->comment('订单编号');
             $table->integer('started_at')->unsigned()->nullable()->comment('开始时间');
             $table->integer('ended_at')->unsigned()->nullable()->comment('结束时间');

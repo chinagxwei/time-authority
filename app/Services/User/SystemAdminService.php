@@ -27,6 +27,7 @@ class SystemAdminService extends UserCommonInterface
             'username' => $this->username,
             'email' => $this->email,
             'password' => $this->password,
+            'role_id' => $this->role_id
         ];
 
         $user = new \App\Models\User();
@@ -37,8 +38,7 @@ class SystemAdminService extends UserCommonInterface
             ->save(
                 new SystemAdmin([
                     'nickname' => 'admin_' . mt_rand(100000, 999999),
-                    'remark' => $this->remark,
-                    'role_id' => $this->role_id
+                    'remark' => $this->remark
                 ])
             ) ? $user : null;
     }

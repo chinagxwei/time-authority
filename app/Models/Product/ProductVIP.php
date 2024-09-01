@@ -10,8 +10,10 @@ use App\Models\Trait\Build\Product\ProductVIPBuild;
 use App\Models\Trait\SearchTrait;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @property string id
@@ -56,6 +58,14 @@ class ProductVIP extends SystemBaseUuidModel
     protected $hidden = [
         'deleted_at', 'updated_at'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder|Model|object|null|static
+     */
+    public static function lastOne()
+    {
+        return self::query()->orderBy('id', 'desc')->lock()->first();
+    }
 
     function searchBuild($param = [], $with = [])
     {
