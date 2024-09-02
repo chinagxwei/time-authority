@@ -5,11 +5,14 @@ namespace App\Services\Install;
 use App\Models\Order\Order;
 use App\Models\Order\OrderRevenuesConfig;
 use App\Models\Product\ProductVIP;
+use App\Models\Schedule\Schedule;
 use App\Models\System\SystemAdmin;
 use App\Models\System\SystemNavigation;
 use App\Models\System\SystemRole;
 use App\Models\System\SystemRouter;
 use App\Models\System\SystemUnit;
+use App\Models\SystemBaseModel;
+use App\Services\Business\ScheduleService;
 use App\Services\Order\TradeService;
 use App\Services\User\MemberService;
 use App\Services\User\SystemAdminService;
@@ -127,6 +130,12 @@ class InstallService
         (new VipService())->setOrder($order2)
             ->setVipId($vip->id)
             ->setMemberId($member->id)
+            ->execute();
+
+        (new ScheduleService())->setTitle('First Schedule')
+            ->setRemark('test data')
+            ->setTips(SystemBaseModel::ENABLE)
+            ->setDate(date("Y-m-d H:i:s"), date("Y-m-d H:i:s"))
             ->execute();
     }
 }

@@ -27,14 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int ended_weeks
  * @property int started_at
  * @property int ended_at
- * @property string location
- * @property string remark
- * @property int loop
  * @property int tips
- * @property int openness
- * @property int gmt
- * @property double latitude
- * @property double longitude
  * @property int created_by
  * @property int updated_by
  * @property Carbon created_at
@@ -66,9 +59,8 @@ class Schedule extends SystemBaseModel
     protected $fillable = [
         'member_id', 'quest_id', 'title', 'started_year',
         'ended_year', 'started_weeks', 'ended_weeks',
-        'started_at', 'ended_at', 'location', 'remark',
-        'loop', 'tips', 'openness', 'gmt', 'latitude',
-        'longitude', 'created_by', 'updated_by'
+        'started_at', 'ended_at', 'remark', 'tips',
+        'created_by', 'updated_by'
     ];
 
     protected $hidden = [
@@ -130,28 +122,12 @@ class Schedule extends SystemBaseModel
 //            $build = $build->where('ended_at', $this->ended_at);
 //        }
 
-        if (!empty($this->location)) {
-            $build = $build->where('location', 'like', "%{$this->location}%");
-        }
-
         if (!empty($this->remark)) {
             $build = $build->where('remark', 'like', "%{$this->remark}%");
         }
 
-        if (isset($this->loop)) {
-            $build = $build->where('loop', $this->loop);
-        }
-
         if (isset($this->tips)) {
             $build = $build->where('tips', $this->tips);
-        }
-
-        if (isset($this->openness)) {
-            $build = $build->where('openness', $this->openness);
-        }
-
-        if (isset($this->gmt)) {
-            $build = $build->where('gmt', $this->gmt);
         }
 
         return $build->with($with);

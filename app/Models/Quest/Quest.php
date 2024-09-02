@@ -15,6 +15,7 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property string id
+ * @property string member_id
  * @property string title
  * @property int stock
  * @property int price
@@ -24,7 +25,7 @@ use Illuminate\Support\Carbon;
  * @property int order_sn
  * @property int started_at
  * @property int ended_at
- * @property string location
+ * @property string address
  * @property double latitude
  * @property double longitude
  * @property int created_by
@@ -55,9 +56,9 @@ class Quest extends SystemBaseUuidModel
     protected $dateFormat = 'U';
 
     protected $fillable = [
-        'title', 'stock', 'price', 'unit_id', 'remark', 'status',
-        'order_sn', 'started_at', 'ended_at', 'location', 'latitude',
-        'longitude', 'created_by', 'updated_by'
+        'member_id', 'title', 'stock', 'price', 'unit_id', 'remark',
+        'status', 'order_sn', 'started_at', 'ended_at', 'address',
+        'latitude', 'longitude', 'created_by', 'updated_by'
     ];
 
     protected $hidden = [
@@ -80,6 +81,10 @@ class Quest extends SystemBaseUuidModel
 
         if (!empty($this->order_sn)) {
             $build = $build->where('order_sn', $this->order_sn);
+        }
+
+        if (!empty($this->address)){
+            $build = $build->where('address', 'like', "%{$this->address}%");
         }
 
         return $build->with($with);

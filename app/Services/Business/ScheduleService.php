@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Schedule;
+namespace App\Services\Business;
 
 use App\Models\Schedule\Schedule;
 
@@ -12,19 +12,7 @@ class ScheduleService
 
     private $end_date;
 
-    private $location;
-
-    private $loop;
-
     private $tips;
-
-    private $openness;
-
-    private $gmt;
-
-    private $latitude;
-
-    private $longitude;
 
     private $remark;
 
@@ -34,35 +22,19 @@ class ScheduleService
         return $this;
     }
 
+    public function setDate($start_date, $end_date)
+    {
+        $this->start_date = $start_date;
+        $this->end_date = $end_date;
+        return $this;
+    }
+
     public function setRemark($remark)
     {
         $this->remark = $remark;
         return $this;
     }
 
-    public function setLongitude($longitude)
-    {
-        $this->longitude = $longitude;
-        return $this;
-    }
-
-    public function setLatitude($latitude)
-    {
-        $this->latitude = $latitude;
-        return $this;
-    }
-
-    public function setGmt($gmt)
-    {
-        $this->gmt = $gmt;
-        return $this;
-    }
-
-    public function setOpenness($openness)
-    {
-        $this->openness = $openness;
-        return $this;
-    }
 
     public function setTips($tips)
     {
@@ -70,29 +42,6 @@ class ScheduleService
         return $this;
     }
 
-    public function setLoop($loop)
-    {
-        $this->loop = $loop;
-        return $this;
-    }
-
-    public function setLocation($location)
-    {
-        $this->location = $location;
-        return $this;
-    }
-
-    public function setStartDate($start_date)
-    {
-        $this->start_date = $start_date;
-        return $this;
-    }
-
-    public function setEndDate($end_date)
-    {
-        $this->end_date = $end_date;
-        return $this;
-    }
 
     public function execute()
     {
@@ -102,20 +51,14 @@ class ScheduleService
 
         $data = [
             'title' => $this->title,
-            'start_date' => $this->start_date,
-            'end_date' => $this->end_date,
+            'started_at' => $this->start_date,
+            'ended_at' => $this->end_date,
             'started_weeks' => date_format($this->start_date, 'W'),
             'ended_weeks' => date_format($this->end_date, 'W'),
             'started_year' => date_format($this->start_date, 'Y'),
             'ended_year' => date_format($this->end_date, 'Y'),
             'remark' => $this->remark,
-            'location' => $this->location,
-            'loop' => $this->loop,
             'tips' => $this->tips,
-            'openness' => $this->openness,
-            'gmt' => $this->gmt,
-            'latitude' => $this->latitude,
-            'longitude' => $this->longitude,
         ];
 
         Schedule::query()->create($data);
