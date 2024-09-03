@@ -8,6 +8,10 @@ class ScheduleService
 {
     private $title;
 
+    private $member_id;
+
+    private $quest_id;
+
     private $start_date;
 
     private $end_date;
@@ -15,6 +19,18 @@ class ScheduleService
     private $tips;
 
     private $remark;
+
+    public function setQuestId($quest_id)
+    {
+        $this->quest_id = $quest_id;
+        return $this;
+    }
+
+    public function setMemberId($member_id)
+    {
+        $this->member_id = $member_id;
+        return $this;
+    }
 
     public function setTitle($title)
     {
@@ -24,8 +40,8 @@ class ScheduleService
 
     public function setDate($start_date, $end_date)
     {
-        $this->start_date = $start_date;
-        $this->end_date = $end_date;
+        $this->start_date = strtotime($start_date);
+        $this->end_date = strtotime($end_date);
         return $this;
     }
 
@@ -51,12 +67,14 @@ class ScheduleService
 
         $data = [
             'title' => $this->title,
+            'member_id' => $this->member_id,
+            'quest_id' => $this->quest_id,
             'started_at' => $this->start_date,
             'ended_at' => $this->end_date,
-            'started_weeks' => date_format($this->start_date, 'W'),
-            'ended_weeks' => date_format($this->end_date, 'W'),
-            'started_year' => date_format($this->start_date, 'Y'),
-            'ended_year' => date_format($this->end_date, 'Y'),
+            'started_weeks' => date('W', $this->start_date),
+            'ended_weeks' => date('W', $this->end_date),
+            'started_year' => date('Y', $this->start_date),
+            'ended_year' => date('Y', $this->end_date),
             'remark' => $this->remark,
             'tips' => $this->tips,
         ];

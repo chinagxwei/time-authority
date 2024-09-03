@@ -133,6 +133,7 @@ class InstallService
             ->execute();
 
         (new ScheduleService())->setTitle('First Schedule')
+            ->setMemberId($member->id)
             ->setRemark('test data')
             ->setTips(SystemBaseModel::ENABLE)
             ->setDate(date("Y-m-d H:i:s"), date("Y-m-d H:i:s"))
