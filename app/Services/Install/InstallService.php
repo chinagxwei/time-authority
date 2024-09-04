@@ -12,6 +12,7 @@ use App\Models\System\SystemRole;
 use App\Models\System\SystemRouter;
 use App\Models\System\SystemUnit;
 use App\Models\SystemBaseModel;
+use App\Services\Business\ScheduleBusinessService;
 use App\Services\Business\ScheduleService;
 use App\Services\Order\TradeService;
 use App\Services\User\MemberService;
@@ -132,11 +133,14 @@ class InstallService
             ->setMemberId($member->id)
             ->execute();
 
-        (new ScheduleService())->setTitle('First Schedule')
+        $schedule = (new ScheduleService())->setTitle('First Schedule')
             ->setMemberId($member->id)
             ->setRemark('test data')
             ->setTips(SystemBaseModel::ENABLE)
             ->setDate(date("Y-m-d H:i:s"), date("Y-m-d H:i:s"))
             ->execute();
+        var_dump($schedule->id)
+        (new ScheduleBusinessService)->setSchedule($schedule)
+            ->publishScheduleSale(10, $vip->unit_id, 0,1);
     }
 }

@@ -78,8 +78,8 @@ class ScheduleService
             'remark' => $this->remark,
             'tips' => $this->tips,
         ];
-
-        Schedule::query()->create($data);
+        $schedule = (new Schedule());
+        return $schedule->fill($data)->save() ? $schedule : null;
     }
 
 

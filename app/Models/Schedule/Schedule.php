@@ -88,6 +88,11 @@ class Schedule extends SystemBaseModel
         );
     }
 
+    public function sales()
+    {
+        return $this->hasOne(ScheduleSales::class, 'schedule_id', 'id');
+    }
+
     public function quest()
     {
         return $this->hasOne(Quest::class, 'id', 'quest_id');

@@ -3,6 +3,7 @@
 namespace App\Services\Business;
 
 use App\Models\Schedule\Schedule;
+use App\Models\Schedule\ScheduleSales;
 
 class ScheduleBusinessService
 {
@@ -22,19 +23,21 @@ class ScheduleBusinessService
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
      * @throws \Exception
      */
-    public function publishScheduleSale($price, $unit_id, $openness)
+    public function publishScheduleSale($price, $unit_id, $openness, $status)
     {
         if (empty($this->schedule)) {
             throw new \Exception('Schedule is empty');
         }
 
         $data = [
-            'schedule_id' => $this->schedule->id,
             'price' => $price,
             'unit_id' => $unit_id,
-            'openness' => $openness
+            'openness' => $openness,
+            'status' => $status
         ];
 
-        return Schedule::query()->create($data);
+        ;
+
+        return $this->schedule->sales()->create($data);
     }
 }
