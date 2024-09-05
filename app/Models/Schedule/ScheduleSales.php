@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 /**
- * @property string id
+ * @property int id
  * @property string schedule_id
  * @property int price
  * @property int unit_id
@@ -30,7 +30,6 @@ class ScheduleSales extends SystemBaseModel
 
     protected $table = 'schedule_sales';
 
-    protected $keyType = 'string';
     /**
      * 指定是否模型应该被戳记时间。
      *

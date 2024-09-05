@@ -13,8 +13,8 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('schedule_sales', function (Blueprint $table) {
-            $table->uuid('id')->unique()->primary();
-            $table->uuid('schedule_id')->index()->nullable()->comment('日程安排ID');
+            $table->increments('id')->unsigned();
+            $table->integer('schedule_id')->index()->nullable()->comment('日程安排ID');
             $table->bigInteger('price')->unsigned()->nullable()->comment('价格（单位：分）');
             $table->integer('unit_id')->unsigned()->comment('单位ID');
             $table->string('order_sn', 64)->index()->nullable()->comment('售出订单编号');

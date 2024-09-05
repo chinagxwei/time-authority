@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('schedules', function (Blueprint $table) {
-            $table->uuid('id')->unique()->primary();
+            $table->increments('id')->unsigned();
             $table->uuid('member_id')->index()->nullable()->comment('会员ID');
             $table->uuid('quest_id')->index()->nullable()->comment('任务ID');
             $table->string('title', 128)->index()->nullable()->comment('标题');

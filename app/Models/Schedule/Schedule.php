@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * @property string id
+ * @property int id
  * @property string member_id
  * @property string quest_id
  * @property string title
@@ -41,7 +41,6 @@ class Schedule extends SystemBaseModel
 
     protected $table = 'schedules';
 
-    protected $keyType = 'string';
     /**
      * 指定是否模型应该被戳记时间。
      *
