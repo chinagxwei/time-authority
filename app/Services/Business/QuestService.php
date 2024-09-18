@@ -85,6 +85,10 @@ class QuestService
             throw new \Exception('参数缺失');
         }
 
+        if ($this->start_date > $this->end_date) {
+            throw new \Exception('开始时间不能大于结束时间');
+        }
+
         $data = [
             'member_id' => $this->member_id,
             'title' => $this->title,
@@ -92,7 +96,7 @@ class QuestService
             'price' => $this->price,
             'unit_id' => $this->unit_id,
             'remark' => $this->remark,
-            'order_sn'=>'',
+            'order_sn' => null,
             'started_at' => $this->start_date,
             'ended_at' => $this->end_date,
             'address' => $this->address,

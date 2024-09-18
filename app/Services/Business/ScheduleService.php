@@ -65,6 +65,10 @@ class ScheduleService
             throw new \Exception('开始时间或结束时间不能为空');
         }
 
+        if ($this->start_date > $this->end_date){
+            throw new \Exception('开始时间不能大于结束时间');
+        }
+
         $data = [
             'title' => $this->title,
             'member_id' => $this->member_id,
@@ -82,23 +86,4 @@ class ScheduleService
         return $schedule->fill($data)->save() ? $schedule : null;
     }
 
-
-//    /**
-//     * 创建当前服务测试用例
-//     */
-//    public function test()
-//    {
-//        $this->setTitle('测试')
-//            ->setStartDate(new \DateTime('2021-01-01'))
-//            ->setEndDate(new \DateTime('2021-01-02'))
-//            ->setLocation('测试地址')
-//            ->setLoop(1)
-//            ->setTips(1)
-//            ->setOpenness(1)
-//            ->setGmt(1)
-//            ->setLatitude(1)
-//            ->setLongitude(1)
-//            ->setRemark('测试备注')
-//            ->execute();
-//    }
 }

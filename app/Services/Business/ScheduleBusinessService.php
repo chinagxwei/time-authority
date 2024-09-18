@@ -4,6 +4,9 @@ namespace App\Services\Business;
 
 use App\Models\Schedule\Schedule;
 use App\Models\Schedule\ScheduleSales;
+use App\Models\System\SystemUnit;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class ScheduleBusinessService
 {
@@ -17,26 +20,29 @@ class ScheduleBusinessService
     }
 
     /**
-     * @param $price
+     * @param $amount
      * @param $unit_id
      * @param $openness
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
+     * @param $status
+     * @return Builder|Model
      * @throws \Exception
      */
-    public function publishScheduleSale($price, $unit_id, $openness, $status)
+    public function publishScheduleSale($amount, $unit_id, $openness, $status)
     {
         if (empty($this->schedule)) {
             throw new \Exception('Schedule is empty');
         }
 
+        $unit = SystemUnit::findOneByID($unit_id);
+
+        $amount = $amount * $unit->exchange_rate;
+
         $data = [
-            'price' => $price,
+            'price' => $amount,
             'unit_id' => $unit_id,
             'openness' => $openness,
             'status' => $status
         ];
-
-        ;
 
         return $this->schedule->sales()->create($data);
     }

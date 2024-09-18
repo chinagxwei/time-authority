@@ -139,8 +139,10 @@ class InstallService
             ->setTips(SystemBaseModel::ENABLE)
             ->setDate(date("Y-m-d H:i:s"), date("Y-m-d H:i:s"))
             ->execute();
-        var_dump($schedule->id)
+
         (new ScheduleBusinessService)->setSchedule($schedule)
             ->publishScheduleSale(10, $vip->unit_id, 0,1);
+
+
     }
 }
