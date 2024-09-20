@@ -87,11 +87,17 @@ class Schedule extends SystemBaseModel
         );
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function sales()
     {
         return $this->hasOne(ScheduleSales::class, 'schedule_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function quest()
     {
         return $this->hasOne(Quest::class, 'id', 'quest_id');

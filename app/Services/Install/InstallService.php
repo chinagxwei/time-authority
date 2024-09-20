@@ -143,6 +143,10 @@ class InstallService
         (new ScheduleBusinessService)->setSchedule($schedule)
             ->publishScheduleSale(10, $vip->unit_id, 0,1);
 
+        $order2 = TradeService::memberOrder(10);
 
+        $schedule->sales()->update([
+            'order_sn' => $order2->sn,
+        ]);
     }
 }

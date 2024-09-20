@@ -7,6 +7,12 @@ use App\Models\System\SystemUnit;
 
 class TradeService
 {
+    /**
+     * @param $amount
+     * @param $order_type
+     * @param $unit_id
+     * @return Order
+     */
     public static function platformOrder($amount, $order_type = Order::ORDER_TYPE_PAY, $unit_id = 1)
     {
         return self::generate(
@@ -18,6 +24,12 @@ class TradeService
         );
     }
 
+    /**
+     * @param $amount
+     * @param $pay_method
+     * @param $unit_id
+     * @return Order
+     */
     public static function memberOrder($amount, $pay_method = Order::PAY_METHOD_WECHAT, $unit_id = 1)
     {
         return self::generate(
@@ -29,6 +41,14 @@ class TradeService
         );
     }
 
+    /**
+     * @param $amount
+     * @param $order_type
+     * @param $pay_method
+     * @param $pay_status
+     * @param $unit_id
+     * @return Order
+     */
     public static function generate($amount, $order_type, $pay_method, $pay_status, $unit_id)
     {
         $order = new Order();
