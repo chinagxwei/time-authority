@@ -54,7 +54,10 @@ class SystemRole extends SystemBaseModel
 
     const USER_TYPE_MEMBER = 1;
 
-    const USER_TYPE_PLATFORM_MANAGER = 100;
+    const USER_ORGANIZATION_MANAGER = 100;
+
+    const USER_TYPE_PLATFORM_MANAGER = 300;
+
 
     const USER_TYPE_PLATFORM_SUPER_ADMIN = 999;
 

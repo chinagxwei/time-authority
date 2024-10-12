@@ -13,7 +13,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('schedules_purchases', function (Blueprint $table) {
-            $table->increments('id')->unique()->primary();
+            $table->increments('id')->unsigned();
             $table->uuid('schedule_sale_id')->index()->nullable()->comment('日程销售ID');
             $table->uuid('member_id')->index()->nullable()->comment('购买会员ID');
             $table->string('order_sn', 64)->index()->nullable()->comment('购买订单编号');

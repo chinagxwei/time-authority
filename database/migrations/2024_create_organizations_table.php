@@ -18,6 +18,8 @@ return new class extends Migration
             $table->uuid('wallet_id')->index()->nullable()->comment('钱包ID');
             $table->string('name', 64)->nullable()->comment('组织名称');
             $table->string('remark',128)->nullable()->comment('备注');
+            $table->string('bind_link',128)->index()->nullable()->comment('绑定链接');
+            $table->string('bind_qrcode',128)->index()->nullable()->comment('绑定二维码');
             $table->integer('created_at')->unsigned()->nullable();
             $table->integer('updated_at')->unsigned()->nullable();
             $table->integer('created_by')->index()->unsigned()->nullable()->comment('用户ID');

@@ -35,7 +35,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Schedule extends SystemBaseModel
 {
-    use HasFactory, SoftDeletes, Uuids, SearchTrait,
+    use HasFactory, SoftDeletes, SearchTrait,
         CreatedRelation, UpdatedRelation, ScheduleBuild,
         MemberRelation;
 
