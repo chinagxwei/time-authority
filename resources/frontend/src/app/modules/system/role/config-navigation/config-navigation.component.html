@@ -1,0 +1,17 @@
+<nz-modal [nzWidth]="600" [(nzVisible)]="visible" nzTitle="菜单配置" (nzOnCancel)="handleCancel()">
+  <div *nzModalContent>
+    <nz-tree
+      [nzData]="nodes"
+      nzCheckable
+      nzMultiple
+      nzVirtualHeight="360px"
+      [nzCheckedKeys]="defaultCheckedKeys"
+      (nzClick)="nzEvent($event)"
+      (nzExpandChange)="nzEvent($event)"
+      (nzCheckBoxChange)="nzEvent($event)"
+    ></nz-tree>
+  </div>
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">关闭</button>
+  </div>
+</nz-modal>

@@ -1,0 +1,17 @@
+<nz-modal [nzWidth]="900" [(nzVisible)]="visible" nzTitle="路由配置" (nzOnCancel)="handleCancel()">
+  <div *nzModalContent>
+    <nz-transfer
+      style="width: 100%"
+      [nzDataSource]="list"
+      [nzTitles]="['已注册路由', '已配置路由']"
+      [nzListStyle]="{ 'width.px': 450, 'height.px': 450 }"
+      nzShowSearch
+      [nzFilterOption]="filterOption"
+      (nzSearchChange)="search($event)"
+      (nzChange)="change($event)"
+    ></nz-transfer>
+  </div>
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">关闭</button>
+  </div>
+</nz-modal>

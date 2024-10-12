@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {NzModalService} from "ng-zorro-antd/modal";
+import {NzModalModule, NzModalService} from "ng-zorro-antd/modal";
 import {NzMessageService} from "ng-zorro-antd/message";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RoleComponent } from './role/role.component';
@@ -15,6 +15,19 @@ import { UnitComponent } from './unit/unit.component';
 import { MessageComponent } from './message/message.component';
 import { ManagerComponent } from './manager/manager.component';
 import { TagsComponent } from './tags/tags.component';
+import {NzTableModule} from "ng-zorro-antd/table";
+import {NzDividerModule} from "ng-zorro-antd/divider";
+import {NzFormModule} from "ng-zorro-antd/form";
+import {ReactiveFormsModule} from "@angular/forms";
+import {NzInputModule} from "ng-zorro-antd/input";
+import {NzButtonModule} from "ng-zorro-antd/button";
+import {NzTagModule} from "ng-zorro-antd/tag";
+import {EditorForAngularModule} from "wangeditor-for-angular";
+import {NzSwitchModule} from "ng-zorro-antd/switch";
+import {NzSelectModule} from "ng-zorro-antd/select";
+import { ConfigRouterComponent } from './role/config-router/config-router.component';
+import { ConfigNavigationComponent } from './role/config-navigation/config-navigation.component';
+import {SystemRoutingModule} from "./system-routing.module";
 
 
 
@@ -32,10 +45,24 @@ import { TagsComponent } from './tags/tags.component';
     UnitComponent,
     MessageComponent,
     ManagerComponent,
-    TagsComponent
+    TagsComponent,
+    ConfigRouterComponent,
+    ConfigNavigationComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SystemRoutingModule,
+    NzTableModule,
+    NzDividerModule,
+    NzModalModule,
+    NzFormModule,
+    ReactiveFormsModule,
+    NzInputModule,
+    NzButtonModule,
+    NzTagModule,
+    EditorForAngularModule,
+    NzSwitchModule,
+    NzSelectModule
   ],
   providers: [NzModalService, NzMessageService]
 })

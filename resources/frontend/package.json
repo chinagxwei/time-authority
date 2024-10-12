@@ -29,7 +29,8 @@
     "ng-zorro-antd": "^15.1.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.12.0"
+    "zone.js": "~0.12.0",
+    "wangeditor-for-angular": "^15.0.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.2.11",

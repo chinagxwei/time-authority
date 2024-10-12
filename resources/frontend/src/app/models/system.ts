@@ -66,3 +66,29 @@ export class RegisterRouter{
   uri: string = "";
   method: string = "";
 }
+
+export class Unit {
+  id?: number;
+  title: string = "";
+  description?: string = "";
+  label?: string = "";
+  symbol?: string = "";
+  finance: number = 0;
+  exchange_rate: number = 0
+  created_at?: number = 0;
+}
+
+export class Tag {
+  id?: number;
+  title: string = "";
+  day?: number = 0;
+  created_at?: number = 0;
+}
+
+export class SystemFile {
+  id?: number;
+  title: string = "";
+  description?: string = "";
+  url?: string = "";
+  created_at?: number = 0;
+}
